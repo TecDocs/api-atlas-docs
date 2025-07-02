@@ -1,0 +1,127 @@
+---
+id: kubernetes-patterns
+sidebar_label: "🧹 Kubernetes Patterns"
+title: "🧹 Kubernetes Patterns: RBAC, Autoscaling & Probes"
+---
+
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import ProbeDemo from '@site/src/components/ProbeDemo';
+import SecretInjectionCard from '@site/src/components/SecretInjectionCard';
+import RBACRoleCard from '@site/src/components/RBACRoleCard';
+import AutoscalerPreview from '@site/src/components/AutoscalerPreview';
+import KubernetesQuiz from '@site/src/components/KubernetesQuiz';
+
+# 🧹 Kubernetes Patterns: RBAC, Autoscaling & Probes
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<p>
+Now that you’ve seen how YAML drives deployments, and how GitOps and CI/CD bring automation to Kubernetes, it’s time to dive deeper into the <strong>patterns that power stability, security, and scalability</strong> inside production clusters. This section focuses on three foundational patterns: <HoverExplain word="RBAC" definition="Role-Based Access Control, used to control access to Kubernetes resources at the namespace or cluster level." />, <HoverExplain word="Health Probes" definition="Liveness and readiness checks that help Kubernetes know when to restart or route traffic to pods." />, and <HoverExplain word="Autoscalers" definition="Controllers that automatically adjust the number of pods based on metrics like CPU, memory, or custom thresholds." />.
+</p>
+
+<p>
+These aren’t just abstract concepts, they're safeguards that ensure your APIs survive production stress. With each of these Kubernetes constructs, you add another layer of resilience. When misused or overlooked, they’re often the root cause of deployment failures, unauthorized access, or broken rollouts. Our goal here is to explore not just their syntax, but their true role in a DevOps culture.
+</p>
+
+<p>
+As we walk through each one, you'll see them applied through animated demos, realistic YAML samples, and real-world DevOps integration patterns. This will lay the groundwork for understanding how these patterns tie directly into the CI/CD pipelines we explore next.
+</p>
+</motion.div>
+
+---
+
+## 🔐 Secure Configuration with Secrets
+
+<p>Here’s how secrets are injected and consumed inside a typical cluster:</p>
+<SecretInjectionCard />
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<p>
+Secrets are often the first stumbling block for developers transitioning to Kubernetes. While configuration via <HoverExplain word="ConfigMaps" definition="Non-sensitive key-value config data used to configure Kubernetes apps without rebuilding images." /> is straightforward, injecting secure data like API keys, credentials, or tokens must be done via <HoverExplain word="Secrets" definition="A Kubernetes object that stores sensitive information in base64 format, accessible via environment variables or mounted volumes." />.
+</p>
+<p>
+In a modern workflow, your CI/CD platform pulls secrets from encrypted stores, like <strong>GitHub Secrets</strong>, <strong>HashiCorp Vault</strong>, or <strong>Azure Key Vault</strong>, and syncs them into the cluster. The result is secure, compliant, and decoupled access. This reduces risk in audits, improves maintainability, and ensures deployments don't expose sensitive data in logs or code.
+</p>
+<p>
+Let’s now explore how access to those secrets is controlled; this is where RBAC becomes critical.
+</p>
+</motion.div>
+
+---
+
+## 🛡️ Access Control with RBAC
+
+<p>The role card below illustrates fine-grained access enforcement in practice:</p>
+<RBACRoleCard />
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<p>
+While secrets keep sensitive data safe, <strong>RBAC</strong> determines who is allowed to use them. Kubernetes uses <HoverExplain word="Roles" definition="A set of permissions within a namespace." /> and <HoverExplain word="RoleBindings" definition="A link that grants a Role’s permissions to a specific user or ServiceAccount." /> to enforce principle of least privilege. Whether you're giving CI access to create pods, or developers access to read logs, RBAC scoping ensures no one has unnecessary control.
+</p>
+<p>
+This becomes vital in shared clusters or GitOps pipelines, where service accounts tied to deployment tools may only need narrow permissions. It’s also key for observability tooling that needs read access, but not mutation rights. With RBAC, you enforce separation of duties and traceability across your deployment lifecycle.
+</p>
+<p>
+Next, we’ll examine how Kubernetes evaluates pod health in production, and controls traffic routing accordingly.
+</p>
+</motion.div>
+
+---
+
+## 🧪 Probes: Liveness & Readiness
+
+<p>Below is a simulated walkthrough of how readiness and liveness probes work in real clusters:</p>
+<ProbeDemo />
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<p>
+If RBAC governs who can deploy, <strong>probes</strong> govern when something should stay deployed. Kubernetes supports two key probe types: <HoverExplain word="Liveness Probe" definition="A check that restarts the container if the app is unhealthy." /> and <HoverExplain word="Readiness Probe" definition="A check that determines whether the pod is ready to receive traffic." />. They’re vital for smooth rollouts and zero-downtime deployments.
+</p>
+<p>
+Think of probes like Kubernetes' internal health insurance. A faulty database connection? Liveness restarts the pod. Startup scripts not finished? Readiness blocks traffic until they are. These prevent cascading failures and build self-healing into your infrastructure.
+</p>
+<p>
+But what if your application is healthy, but overwhelmed? That’s when autoscaling kicks in.
+</p>
+</motion.div>
+
+---
+
+## 📈 Autoscaling with HPA
+
+<p>Let’s preview what dynamic scaling looks like with an HPA in action:</p>
+<AutoscalerPreview />
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<p>
+<HoverExplain word="Horizontal Pod Autoscaler (HPA)" definition="A Kubernetes resource that adjusts the number of pod replicas based on metrics like CPU or memory." /> ensures services respond to demand dynamically. Whether you’re dealing with sudden user spikes or off-peak traffic dips, HPA adjusts replicas without manual intervention.
+</p>
+<p>
+You’ll define thresholds, like 80% CPU, and the autoscaler ensures performance under load while minimizing waste. It reads from metrics servers such as <strong>Metrics Server</strong> or <strong>Prometheus Adapter</strong>. These integrations are core to cost-efficient, elastic architecture.
+</p>
+<p>
+Now that we've seen how probes defend uptime and autoscalers handle pressure, it's time to tie these patterns into CI/CD workflows where they're tested, validated, and enforced continuously.
+</p>
+</motion.div>
+
+---
+
+## 🧪 Knowledge Check: Kubernetes Patterns Quiz
+
+<KubernetesQuiz />
+
+---
+
+## 🔄 What’s Next: Pipeline Enforcement
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<p>
+With <strong>RBAC</strong>, <strong>Secrets</strong>, <strong>Probes</strong>, and <strong>Autoscaling</strong> patterns covered, you’ve now internalized the design logic behind resilient Kubernetes apps. But how do we make sure these patterns are not just optional, but enforced across all teams?
+</p>
+<p>
+That’s where CI/CD systems step in. Pipelines ensure these patterns are tested, scanned, and enforced before anything hits production. They inject secrets, verify probes, and lint RBAC definitions to prevent privilege escalation. CI/CD makes these patterns enforceable and auditable.
+</p>
+<p>
+In the next section, we’ll build a real CI/CD system that enforces Kubernetes quality gates; covering GitHub Actions, Helm, secrets injection, and multi-cluster delivery.
+</p>
+</motion.div>

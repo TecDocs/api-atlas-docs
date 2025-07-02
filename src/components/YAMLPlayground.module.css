@@ -1,0 +1,33 @@
+
+.wrapper {
+  background: var(--ifm-background-surface-color);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: var(--ifm-shadow-md);
+  margin-bottom: 1rem;
+}
+
+.toggleBtn {
+  background-color: #0f172a;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.toggleBtn:hover {
+  background-color: #1e293b;
+}
+
+.codeBlock {
+  background: #1e1e1e;
+  color: #f8f8f2;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: monospace;
+}

@@ -1,0 +1,17 @@
+
+.pipelineContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.stageCard {
+  background-color: var(--ifm-card-background);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 220px;
+  text-align: center;
+}

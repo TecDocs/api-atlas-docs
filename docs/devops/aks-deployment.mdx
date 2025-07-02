@@ -1,0 +1,125 @@
+---
+id: devops-aks-deployment
+title: Deploying APIs with AKS (Azure Kubernetes Service)
+sidebar_label: ☁️ AKS Deployment
+---
+
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import AksArchitectureDiagram from '@site/src/components/AksArchitectureDiagram';
+import CompanyAksUsageMatrix from '@site/src/components/CompanyAksUsageMatrix';
+import DeploymentQuiz from '@site/src/components/DeploymentQuiz';
+import Figure from '@site/src/components/Figure';
+
+# ☁️ Deploying APIs with AKS (Azure Kubernetes Service)
+
+<motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+<p>
+In this advanced section of <strong>API Atlas</strong>, we move beyond Swagger, Redoc, and Postman to orchestrate full-stack deployments with <HoverExplain word="AKS" definition="Azure Kubernetes Service (AKS) is a managed Kubernetes platform that allows you to deploy, scale, and manage containerized applications on Azure." />. This isn’t just infrastructure, it’s a paradigm shift; AKS is where declarative APIs become live, resilient services.
+</p>
+
+<p>
+Why AKS? Because scaling APIs in production isn't about containers alone, it’s about observability, autoscaling, secure ingress, availability zones, and a declarative infrastructure that devs and ops can both trust; AKS bundles these capabilities into one tightly integrated Azure-native ecosystem.
+</p>
+</motion.div>
+
+---
+
+## 🧐 AKS Architecture: What Lives Where?
+
+<motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+  <AksArchitectureDiagram />
+</motion.div>
+
+<p>
+Figure 1. This architectural breakdown outlines AKS across four planes: <strong>Control Plane</strong>, <strong>Node Pool</strong>, <strong>Networking</strong>, and <strong>Application</strong>. Azure manages the control plane, featuring the Kubernetes API server, etcd, and load balancer health probes, so you can focus on pods and deployments.
+</p>
+
+<p>
+Kubernetes is complex, but AKS abstracts away the toil. Think of it like an air traffic control system: you chart the flight path (YAML), define your aircrafts (pods), and AKS coordinates the sky (cluster); this division of labor makes DevOps scalable and cloud-native.
+</p>
+
+---
+
+## 📦 CI/CD Into AKS: The Full Flow
+
+<Figure src="/img/Cipipe.png" alt="CI/CD Flowchart for AKS Deployment" caption="Figure 2. A typical pipeline that validates specs, runs Postman tests, and triggers AKS deployment." />
+
+<p>
+In your earlier stages of API Atlas, you validated OpenAPI specs in Swagger UI, tested endpoints via Postman, and created live reference docs with Redoc; the natural next step is turning those definitions into running services. This is the job of a CI/CD pipeline targeting AKS.
+</p>
+
+<p>
+For example, a GitHub Actions pipeline might lint your YAML, validate schema consistency, run Postman tests in headless mode, and deploy to AKS using <HoverExplain word="kubectl" definition="Command-line tool for communicating with Kubernetes clusters." /> or <HoverExplain word="Helm" definition="A package manager for Kubernetes that simplifies deployment and upgrades." />; the entire flow becomes testable, traceable, and reproducible.
+</p>
+
+---
+
+## 💼 Who’s Using AKS for API Infrastructure?
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+  <CompanyAksUsageMatrix />
+</motion.div>
+
+<p>
+These aren’t just brands, they're AKS case studies. <strong>Microsoft</strong> runs core services with AKS for internal testing and external scaling; <strong>Adobe</strong> runs analytics APIs on multi-region clusters; <strong>Starbucks</strong> leverages Helm for consistent rollout of their mobile ordering APIs. If you're preparing for DevOps interviews, this is your signal: AKS knowledge = readiness.
+</p>
+
+<p>
+Understanding how GitOps, RBAC, and service meshes like Istio integrate into AKS clusters lets you contribute from day one to enterprise-grade systems.
+</p>
+
+---
+
+## 🔍 Why Not ECS, GKE, or Bare Metal?
+
+<p>
+Great question. AKS competes with <HoverExplain word="EKS" definition="Elastic Kubernetes Service, Amazon's managed Kubernetes offering." />, <HoverExplain word="GKE" definition="Google Kubernetes Engine, Google's hosted Kubernetes solution." />, and even bare-metal setups, but AKS wins when your stack already lives in Azure. With tight integration to <HoverExplain word="Azure Active Directory" definition="Microsoft's identity platform for access control and authentication." />, <HoverExplain word="Azure Monitor" definition="A telemetry and observability suite for infrastructure and applications in Azure." />, and <HoverExplain word="Azure CLI" definition="Command-line tool for managing Azure resources." />, AKS is frictionless.
+</p>
+
+<p>
+You don’t need to self-manage Kubernetes masters, set up DNS zones manually, or configure Kubelet from scratch; it’s opinionated, fast, and cloud-native out of the box.
+</p>
+
+---
+
+## 📘 From YAML to Running Services
+
+<p>
+Let’s zoom out and trace the entire journey:
+</p>
+<ul>
+  <li>Start with an OpenAPI spec in <strong>Swagger UI</strong></li>
+  <li>Test and document the flow with <strong>Postman</strong> and <strong>Redoc</strong></li>
+  <li>Package endpoints with GitHub Actions</li>
+  <li>Push to container registry (optional)</li>
+  <li>Deploy YAML and Helm charts to AKS</li>
+</ul>
+
+<p>
+Your YAML becomes a <HoverExplain word="Deployment" definition="A Kubernetes object that ensures a specified number of pod replicas are running at all times." />, <HoverExplain word="Service" definition="An abstraction that exposes a set of pods as a network service." />, or <HoverExplain word="Ingress" definition="API object that manages external access to services in a cluster." /> in AKS; and because it’s declarative, you can diff it, test it, and roll it back.
+</p>
+
+<p>
+If an API is like a product, then AKS is your assembly line: scalable, modular, and auto-healing; AKS even monitors pod health and applies restart policies based on liveness or readiness probes. Before we move on, test your understanding with this quick AKS deployment quiz below. 
+</p>
+---
+
+
+
+<DeploymentQuiz />
+
+---
+
+## 🎯 What’s Next: Kubernetes Config
+
+<p>
+Now that you’ve seen how APIs go from spec to deployment, we’ll go one layer deeper.
+</p>
+<p>
+Next, you’ll configure <strong>Kubernetes manifests</strong> to fine-tune service behavior; setting replica counts, applying rolling updates, securing endpoints with RBAC, and attaching secrets from Key Vault.
+</p>
+<p>
+In other words, this is where your YAML gets opinionated and your clusters become battle-tested.
+</p>

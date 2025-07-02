@@ -1,0 +1,193 @@
+---
+id: understanding-status-codes
+title: Understanding Status Codes
+sidebar_label: 📟 Understanding Status Codes
+---
+
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import SpotlightCode from '@site/src/components/SpotlightCode';
+import HttpStatusCards from '@site/src/components/HttpStatusCards';
+import HttpTimeline from '@site/src/components/HttpTimeline';
+import StatusCodeCard from '@site/src/components/StatusCodeCard';
+import StatusCodeQuiz from '@site/src/components/StatusCodeQuiz';
+import AnimatedErrorCode from '@site/src/components/AnimatedErrorCode';
+import Link from '@docusaurus/Link';
+
+
+# 📿 Understanding Status Codes
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+Once your environment is configured and your API endpoints are live (as covered in the <Link to="/docs/welcome/quickstart">Quickstart</Link> and <Link to="/docs/getting-started/requirements">Setting Up Your Environment</Link> sections), the next critical layer is understanding how your API communicates outcomes. This is where <HoverExplain word="HTTP status codes" definition="Three-digit numbers returned by a server to indicate the result of a client's request, like 200 for success or 404 for not found." /> come in.
+
+These codes provide immediate context to the client: was the request successful, redirected, malformed, unauthorized, or failed due to a server issue? Without them, clients would be guessing.
+
+Each status code is a language of intent and result. Developers use these signals to design retry logic, handle frontend feedback, validate integrations, and log issues. Without a precise use of these codes, APIs quickly become confusing and error-prone across platforms and consumers.
+
+This section will help you build fluency in HTTP response semantics and strengthen the clarity of your OpenAPI specs.
+</motion.div>
+
+---
+
+## 🧹 Why Status Codes Matter
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+Imagine submitting a form and receiving no visual feedback. Did the request fail, succeed, or timeout? Without a returned status code, the frontend, and the user, is left completely in the dark.
+
+Status codes provide clarity and determinism across all layers of development. Whether debugging with Postman or rendering error banners in a UI, these codes serve as standardized contracts. They help document readers understand what to expect from each endpoint, especially when paired with OpenAPI response blocks.
+
+Status codes are grouped by category:
+
+- <HoverExplain word="1xx" definition="Informational codes indicating the request was received and is continuing. Rarely used." />
+- <HoverExplain word="2xx" definition="Success codes like 200 OK and 201 Created. Indicate a properly handled request." />
+- <HoverExplain word="3xx" definition="Redirection codes like 301 and 302, often used for resource forwarding." />
+- <HoverExplain word="4xx" definition="Client-side errors like 400 Bad Request or 401 Unauthorized. Indicates issues with the request." />
+- <HoverExplain word="5xx" definition="Server-side errors such as 500 Internal Server Error. Points to something failing on the server." />
+
+Knowing which group applies to your response ensures that consumers of your API understand the root cause and next steps.
+</motion.div>
+
+---
+## 🧴 Visual Reference of Core Status Codes
+
+
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+>
+  <HttpStatusCards />
+</motion.div>
+
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7, delay: 0.2 }}
+>
+  <p>
+    The animated grid above presents the five core categories of HTTP status codes, each grouped by its leading digit (1xx–5xx). These categories map directly to how your API communicates outcomes to consumers, from informational handshakes to fatal server failures.
+  </p>
+
+  <p>
+    For each request in your API, you’ll typically define a <HoverExplain word="response object" definition="In OpenAPI, a response object describes the status code, headers, and content returned by an API operation." /> in your <HoverExplain word="OpenAPI spec" definition="A machine-readable YAML or JSON contract that defines your API endpoints, methods, parameters, responses, and expected behavior." />.
+    This ensures accurate feedback across tools like Swagger UI, Postman, and SDK generators.
+  </p>
+
+  <p>
+    Be sure to assign specific status codes (e.g., <code>200</code>, <code>400</code>, <code>404</code>) for each endpoint response to prevent ambiguity. Missing or incorrect mappings in your <code>responses</code> object can result in silent failures during contract testing, broken code generation, or unpredictable mock server behavior.
+  </p>
+</motion.div>
+
+
+## 🛠️ Tooltips, Quizzes, and Live Reference
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<StatusCodeCard />
+</motion.div>
+
+<p>The block above provides inline examples of key status codes and their behaviors. This interactive tool is useful for explaining to both new and experienced developers how the API should behave in various conditions.</p>
+
+<StatusCodeQuiz />
+
+<p>Quizzes like the one above help reinforce learning by prompting users to apply what they’ve seen. Interactive documentation like this helps make error behavior memorable, especially when combined with request/response samples.</p>
+
+<SpotlightCode
+  title="Sample Response Block in OpenAPI"
+  yamlCode={`responses:
+  '200':
+    description: Successfully retrieved data
+  '400':
+    description: Malformed request
+  '404':
+    description: Resource not found
+  '500':
+    description: Internal server error`}
+  jsonCode={`{
+  "200": "Successfully retrieved data",
+  "400": "Malformed request",
+  "404": "Not found",
+  "500": "Server error"
+}`}
+  highlightLines={[2, 4, 6]}
+/>
+
+<p>The code block above shows how to define HTTP status codes in both YAML and JSON. Always include clear, user-facing descriptions to prevent confusion during API onboarding and SDK usage.</p>
+
+---
+
+## 🧱 Historical Timeline of Status Codes
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<HttpTimeline />
+</motion.div>
+
+<p>This timeline illustrates the evolution of HTTP status codes and the growing need for semantic precision. For example, 429 (Too Many Requests) was introduced to better handle throttling and API rate limits. Similarly, 422 (Unprocessable Entity) helps distinguish validation failures from general client errors.</p>
+
+<p>If you're building a public API or serving a frontend at scale, it's important to adopt these modern codes for clarity and robustness.</p>
+
+---
+
+## 🎯 Animated Error Code Feedback
+
+
+
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7 }}
+>
+Error states are not just technical responses, they’re user experiences. Below is a live gallery of animated HTTP status codes, each designed to simulate how modern platforms visually convey failure conditions to developers and end users. These cards combine both UX and developer feedback principles, serving as reusable components for dashboards, mock APIs, and documentation systems.
+</motion.div>
+
+<br />
+
+<div style={{
+  display: 'grid',
+  gap: '1.5rem',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+  marginTop: '1.5rem'
+}}>
+  <AnimatedErrorCode code={404} message="Resource Not Found" hint="The client requested a resource that doesn’t exist. Useful in GET/lookup failures and broken route handling." />
+  <AnimatedErrorCode code={429} message="Too Many Requests" hint="Client exceeded the server’s rate limit threshold. Useful for showing retry intervals or exponential backoff guidance." />
+  <AnimatedErrorCode code={500} message="Internal Server Error" hint="Generic catch-all for unhandled backend exceptions. Often surfaced during unstable deployments or uncaught logic branches." />
+  <AnimatedErrorCode code={401} message="Unauthorized" hint="Authentication credentials were missing or invalid. Common in expired token flows and first-time login attempts." />
+  <AnimatedErrorCode code={403} message="Forbidden" hint="The user is authenticated but lacks permission to access this resource. Useful in RBAC enforcement or permission denial UI." />
+</div>
+
+<br />
+
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+>
+Each animated error module is more than visual polish, it represents a **feedback layer** that both frontend and backend teams can share. When embedded into your API’s developer portal, SDK, or admin dashboard, these components help communicate:
+
+- 🔄 **Retry strategies** (e.g., exponential backoff on 429s)  
+- 🧹 **OpenAPI mapping** (e.g., `<Response code="401">` in YAML specs)  
+- 📦 **SDK failure handling** (e.g., `try/catch` responses in JS clients)  
+- 🧠 **User education** through contextual error visuals
+
+Because these cards are componentized, they can be plugged into CI-driven preview environments, live mocks, API testing sandboxes, or embedded into auto-generated Redoc/Swagger UIs to make error conditions intuitive—not invisible.
+</motion.div>
+
+---
+
+## ✅ Summary and What’s Next
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+HTTP status codes provide the structural language of your API's responses. They help clients determine what happened, what to do next, and whether to show success, retry, or fail gracefully.
+
+In this section, you explored:
+- A categorized breakdown of all major status codes
+- Interactive visuals and card-based UI references
+- Real OpenAPI YAML/JSON response samples
+- The evolution of status codes over time
+- Animated representations of critical errors like 404 and 429
+
+Up next, you’ll begin securing your API. That means diving into <HoverExplain word="Authentication and Authorization" definition="Security mechanisms that verify a user's identity and control what they're allowed to access." />: how to protect endpoints, validate identities, and issue scoped access tokens using industry-standard techniques.
+</motion.div>
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
+👉 Continue to <Link to="/docs/api-reference/authentication-and-authorization">Authentication and Authorization</Link>
+</motion.div>

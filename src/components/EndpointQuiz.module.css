@@ -1,0 +1,70 @@
+.quizContainer {
+  background: var(--ifm-card-background);
+  padding: 1.2rem 1.6rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--ifm-global-shadow-lw);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--ifm-color-primary);
+}
+
+.question {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.optionList {
+  list-style: none;
+  padding-left: 0;
+}
+
+.optionItem {
+  margin-bottom: 0.6rem;
+}
+
+.optionItem input[type="radio"] {
+  margin-right: 0.5rem;
+}
+
+.correct {
+  color: green;
+  font-weight: 600;
+}
+
+.incorrect {
+  color: red;
+}
+
+.submitButton {
+  margin-top: 1rem;
+  background-color: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.feedback {
+  margin-top: 1rem;
+}
+
+.correctMsg {
+  color: green;
+  font-weight: bold;
+}
+
+.incorrectMsg {
+  color: red;
+  font-weight: bold;
+}
+
+.explanation {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}

@@ -1,0 +1,170 @@
+---
+id: debugging-json-and-yaml
+title: Debugging JSON and YAML
+sidebar_label: 🧱 JSON & YAML Debugging
+---
+
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import JSONandYAML from '@site/src/components/JSONandYAML';
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+## 🧱 Diagnosing Structured Data Issues: JSON & YAML
+
+<p>
+After learning to interpret common <HoverExplain word="HTTP status codes" definition="Three-digit responses from a server that indicate the outcome of an HTTP request (e.g., 200 OK, 404 Not Found, 500 Internal Server Error)." />, you're now ready to uncover what often causes them: broken or misaligned structured data. Formats like <HoverExplain word="JSON (JavaScript Object Notation)" definition="A lightweight data-interchange format used for transmitting structured data." /> and <HoverExplain word="YAML (YAML Ain’t Markup Language)" definition="A human-readable data serialization format often used for configuration files." /> are the backbone of nearly every modern API interaction.
+</p>
+
+<p>
+Think of <strong>JSON</strong> as a strict spreadsheet: exact, reliable, unforgiving. Every key, comma, and bracket matters. One character off, and the whole structure collapses. Now picture <strong>YAML</strong> as a screenplay: elegant, indented, and prone to being misunderstood if your spacing is off. It trades rigid syntax for readability but demands spatial awareness.
+</p>
+
+<p>
+When an API request fails, it’s easy to blame the server. But more often, the problem lies in malformed data, improper nesting, or a silent schema mismatch. This section walks you through real-world examples of each failure mode and teaches you how to fix them before they snowball into more complex production issues.
+</p>
+
+<p>
+Each component below displays a common bug scenario, split into a <strong>broken version (left)</strong> and a <strong>corrected version (right)</strong>. The goal is to train your eye to spot subtle issues. Each example is followed by an explanation, relevant tools, and how the issue could trigger a corresponding HTTP error.
+</p>
+
+---
+
+## 🧾 Section 1: Debugging Syntax, Broken Brackets, Trailing Commas
+
+
+<p>
+In JSON, structure is everything. One forgotten comma or extra bracket breaks the parser. These issues often throw <code>400 Bad Request</code> errors or cause specs to silently fail in <HoverExplain word="Swagger UI" definition="A visual interface for testing and exploring APIs defined by OpenAPI specs." />.
+</p>
+
+<p>
+In this example, we’re debugging <strong>raw JSON syntax</strong>. We simulate a malformed API payload where a missing comma results in an unparseable object.
+</p>
+
+<JSONandYAML type="json" />
+<p><em>Figure 1. Debugging syntax: Notice the broken bracket and comma placement (left). Correcting this ensures API interpreters can process the payload properly (right).</em></p>
+
+<p>
+Tools like <HoverExplain word="Prettier" definition="A code formatter that can automatically fix minor JSON formatting issues." /> and <HoverExplain word="JSONLint" definition="An online tool for validating JSON structure." /> help with automated cleanup—but real understanding prevents deeper issues.
+</p>
+
+---
+
+## 📄 Section 2: Debugging Structure, Indentation, Nesting Errors in YAML
+
+<p>
+YAML’s beauty is its readability, but its curse is ambiguity. A space in the wrong place changes scope, keys, or nullifies an entire block. When configuring tools like <HoverExplain word="GitHub Actions" definition="Automated CI/CD pipelines defined using YAML syntax." /> or <HoverExplain word="Kubernetes manifests" definition="YAML files used to define container-based infrastructure." />, this can trigger silent config errors.
+</p>
+
+<p>
+This example illustrates an invalid environment block caused by incorrect nesting under the job definition:
+</p>
+
+<JSONandYAML type="yaml" />
+<p><em>Figure 2. Debugging structure: Bad indentation (left) flattens nested values or causes YAML parsers to fail. Proper alignment (right) restores configuration logic.</em></p>
+
+<p>
+Always use a visible whitespace editor, enable linting plugins, and test your YAML using <HoverExplain word="yamllint" definition="A linter for checking syntax and structure in YAML files." /> before deployment.
+</p>
+
+---
+
+## ⚙️ Section 3: Debugging Semantics, Schema Mismatches in JSON Payloads
+
+<p>
+Now, we shift to semantic debugging. The syntax may be valid—but your request still fails. Why? Because it doesn’t match the expected <HoverExplain word="OpenAPI schema" definition="A contract that defines the expected format, types, and fields in API requests and responses." />.
+</p>
+
+<p>
+In this example, the payload is missing a required field and contains a value type mismatch, causing a <code>400 Bad Request</code> even though the structure is technically correct.
+</p>
+
+<JSONandYAML type="schema" />
+<p><em>Figure 3. Debugging semantics: The left version passes formatting checks but fails schema validation due to a type error and a missing required field. The right version aligns with the OpenAPI contract.</em></p>
+
+<p>
+Use schema validators, Postman schema tests, or <HoverExplain word="contract testing" definition="A method of ensuring API requests and responses conform to predefined expectations." /> tools like Dredd to catch these mismatches early.
+</p>
+
+<p> Let's do a quick refresher. Structured Data Review incoming. </p>
+
+---
+
+
+
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  className="quiz-block enhanced"
+>
+
+ <h3 className="quiz-title">📋 Structured Data Review</h3>
+<p className="quiz-instructions">
+  This isn’t a test, just a final look at what we’ve learned so far. These summaries reinforce how small formatting issues in JSON and YAML can create massive deployment headaches.
+</p>
+
+
+  <ul className="quiz-list">
+    <li>
+      <strong>1.</strong> <strong>Syntax Errors in JSON</strong><br />
+      <span className="quiz-option glow">
+        Issues like trailing commas or mismatched brackets break the parser completely, often causing 400 errors or making Swagger specs unreadable.
+      </span>
+    </li>
+    <li>
+      <strong>2.</strong> <strong>Structural Errors in YAML</strong><br />
+      <span className="quiz-option glow">
+        Improper indentation or incorrect nesting can silently invalidate configs. YAML doesn’t complain loudly, but deployment tools will fail or misbehave.
+      </span>
+    </li>
+    <li>
+      <strong>3.</strong> <strong>Semantic Errors in Payloads</strong><br />
+      <span className="quiz-option glow">
+        Even well-formed data can fail if it violates the schema. Missing required fields or wrong value types lead to 400s that are hard to spot without contract testing tools.
+      </span>
+    </li>
+  </ul>
+
+  <p className="quiz-summary">
+    <em>
+      Together, these errors highlight the importance of structure, precision, and validation tools like Swagger Editor, Prettier, and Dredd. If you can master debugging your data before it hits the server, you’ll reduce friction dramatically across staging, CI, and production.
+    </em>
+  </p>
+
+</motion.div>
+
+
+
+
+
+---
+
+## 🧠 Recap & What’s Next: Diagnosing Network-Level and Infrastructure API Failures
+
+<p>
+We’ve now debugged the entire structured data pipeline:
+</p>
+<ul>
+  <li><strong>Syntax level:</strong> JSON typos, commas, and bracket errors</li>
+  <li><strong>Structural level:</strong> YAML indentation and nesting traps</li>
+  <li><strong>Semantic level:</strong> Schema conformance and OpenAPI mismatches</li>
+</ul>
+
+<p>
+These lessons build on our earlier study of <HoverExplain word="HTTP status codes" definition="Codes that describe the result of an HTTP request, such as 200 OK, 404 Not Found, 500 Internal Server Error." /> and give you a complete understanding of what the server expects from structured input. But not all errors live in your code.
+</p>
+
+<p>
+Next, we’ll explore the “black box” errors: <code>500 Internal Server Error</code>, <code>502 Bad Gateway</code>, and <code>504 Gateway Timeout</code>. These usually stem from misconfigured proxies, unreachable microservices, expired TLS certs, or upstream outages.
+</p>
+
+<p>
+You’ll learn how to differentiate infrastructure issues from client-side mistakes using network tracing tools, cloud logs, and timeout diagnostics. We’ll also cover real-world triage workflows used by senior devs and SREs.
+</p>
+
+<p>
+Let’s transition from structured payloads to dynamic runtime behavior into the final section of our guide: <strong>Network & API Failures</strong>.
+</p>
+
+</motion.div>

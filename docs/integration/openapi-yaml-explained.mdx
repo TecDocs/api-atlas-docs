@@ -1,0 +1,115 @@
+---
+id: openapi-yaml-explained
+title: YAML and JSON Explained
+sidebar_label: 📘 YAML Explained
+---
+
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import Quiz from '@site/src/components/YamlVsJsonQuiz';
+import SchemaTransformer from '@site/src/components/SchemaTransformer';
+import ToolComparisonTable from '@site/src/components/ToolComparisonTable';
+import YamlJsonTimeline from '@site/src/components/YamlJsonTimeline';
+import AnimatedUsageTip from '@site/src/components/AnimatedUsageTip';
+
+# 📘 YAML and JSON Explained
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<p>
+In <HoverExplain word="Quickstart" definition="Our first setup section where you learned to test an API call end-to-end." /> and <HoverExplain word="Test Your First Endpoint" definition="You learned how to perform GET and POST operations, send headers, and parse JSON responses." />, we touched on how APIs communicate. But what governs the <em>structure</em> of those APIs? That story begins with <HoverExplain word="YAML" definition="A readable configuration language used to describe API structure, behaviors, and metadata." />, a quiet powerhouse behind OpenAPI.
+</p>
+</motion.div>
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<p>
+YAML defines endpoints, request bodies, headers, auth flows, and response types. It’s intuitive and readable, but more importantly, it’s <strong>convertible</strong> to JSON, the default response format of APIs. The distinction between the two shapes how APIs are written, consumed, and validated.
+</p>
+</motion.div>
+
+---
+
+## ⏳ Timeline of YAML & JSON in APIs
+
+<YamlJsonTimeline />
+
+<p><strong>Figure 1.</strong> The evolution of API data formats: from XML to JSON to YAML, showing where OpenAPI gained traction and how readability became a priority.</p>
+
+---
+
+## ✍️ YAML Fundamentals
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<ul>
+  <li><HoverExplain word="Indentation" definition="Indentation denotes hierarchy. Always use 2 spaces—tabs break YAML." /></li>
+  <li><HoverExplain word="Scalars" definition="Simple values like strings, integers, or booleans." /></li>
+  <li><HoverExplain word="Mappings" definition="Key-value structures like user: 'John'. Most YAML elements are mappings." /></li>
+  <li><HoverExplain word="Sequences" definition="Dash-prefixed lists that become arrays in JSON." /></li>
+  <li><HoverExplain word="Anchors" definition="Advanced YAML feature allowing you to reuse blocks of config with aliases." /></li>
+</ul>
+</motion.div>
+
+<p>
+These fundamentals map directly to how APIs are structured. Once you understand these YAML patterns, you’ll start recognizing them inside every OpenAPI spec, no matter the tool you use.
+</p>
+
+---
+
+## 🛠️ Tool Comparison
+
+<ToolComparisonTable
+  items={[
+    {
+      name: "Swagger Editor",
+      description: "Live-edit OpenAPI YAML files and preview their structure.",
+      pros: ["YAML-first", "Real-time error checking", "Mock server integration"],
+      cons: ["Limited theming", "No Git integration"]
+    },
+    {
+      name: "Postman",
+      description: "Use OpenAPI JSON or YAML to generate requests.",
+      pros: ["Great for testing", "Collection generation", "Visual data output"],
+      cons: ["YAML support is read-only", "Editing YAML requires import/export"]
+    },
+    {
+      name: "Redoc",
+      description: "Reference documentation site built from OpenAPI YAML.",
+      pros: ["Readable UI", "Auto-titles and tag grouping", "Supports all spec versions"],
+      cons: ["Static-only", "Harder to customize without React"]
+    }
+  ]}
+/>
+
+<p><strong>Figure 4.</strong> Side-by-side look at how Swagger, Postman, and Redoc support YAML and JSON. Helps you choose the right tool for writing, reviewing, and validating specs.</p>
+
+<AnimatedUsageTip
+  tip="Use YAML anchors and aliases to reduce duplication in large OpenAPI specs."
+  emphasis="They let you define a shared structure once and reuse it across multiple components. Ideal for power users managing reusable schemas or shared responses."
+/>
+
+<AnimatedUsageTip
+  tip="Lint your OpenAPI YAML specs with Spectral, SwaggerHub, or Stoplight CLI."
+  emphasis="These tools catch structural issues, enforce consistency, and prevent invalid specs from being published. Add them to your CI pipeline for enterprise-grade validation."
+/>
+
+---
+
+## ✅ Summary & What’s Next
+
+<Quiz />
+<p><strong>Figure 5.</strong> Final recap quiz for YAML vs JSON, placed before the transition to test what you’ve retained from the entire section.</p>
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<p>
+By now, you’ve explored YAML’s syntax, compared it to JSON, seen how specs transform into output, and tried the tools used in every serious API workflow. YAML isn’t just a format, it’s a <em>workflow bridge</em> from design to delivery.
+</p>
+</motion.div>
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<p>
+In the next section, we leave behind the “how” and go into the “why.” You’ll explore the <strong>OpenAPI Spec</strong> in its entirety; from reusable components to security, tags, validation, and automated contract testing. This is where YAML and JSON evolve into API governance.
+</p>
+</motion.div>
+
+<motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+👉 <strong>Continue to <a href="/docs/integration/openapi-spec">OpenAPI Specification</a></strong>
+</motion.div>

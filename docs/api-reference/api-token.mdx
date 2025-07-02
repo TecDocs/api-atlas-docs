@@ -1,0 +1,88 @@
+---
+id: api-token
+title: API Token
+sidebar_label: 🔐 Understanding API Tokens
+---
+
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import Link from '@docusaurus/Link';
+import ApiTokenQuiz from '@site/src/components/ApiTokenQuiz';
+
+# 🔐 API Token
+
+<motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+In the previous section, you saw how endpoints define the structure of your API, and how resources are grouped. But none of that matters without a secure way to access those endpoints, and that’s where the <HoverExplain word="API Token" definition="A unique, secret key that identifies and authorizes a client making requests to an API." /> comes in.
+
+An API token acts as a digital key. It is included in the header of a request, telling the server, “Hey, I am authorized to do this.” Without it, even a perfectly structured `/users` endpoint will return a <HoverExplain word="401 Unauthorized" definition="The request was not completed because it lacks valid authentication credentials." /> or <HoverExplain word="403 Forbidden" definition="The request was understood but refused due to lack of proper authorization." />.
+
+Tokens are usually passed via HTTP headers, often under the `Authorization` field. This applies whether you are building a single-page app, a mobile app, or a CLI that interacts with an API.
+
+There are different types of tokens:
+- **Bearer Tokens**, the most common type, included in the `Authorization` header
+- **API Keys**, simpler but less secure
+- **JWTs (JSON Web Tokens)**, self-contained, stateless, and often include expiration
+- **OAuth Tokens**, used when integrating with third-party services
+
+API tokens provide a mechanism for both <HoverExplain word="authentication" definition="The process of verifying the identity of a user or client." /> and <HoverExplain word="authorization" definition="The process of determining what a user or client is allowed to do." />. In the <Link to="/docs/api-reference/authentication-and-authorization">Authentication and Authorization</Link> section, we explored how tokens tie directly into role-based access control, scopes, and rate limits.
+
+Here is a real-world example using curl:
+</motion.div>
+
+## ✍️ Example Curl Request with Token
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+```bash
+curl -H "Authorization: Bearer sk_test_abc123" \
+  https://api.example.com/users/12345
+```
+This tells the server, “Here is who I am, verify me, and give me access to the user record.” Without that token, the request would be denied with a 401 or 403 error.
+</motion.div>
+
+## 📄 YAML Example: Securing a Route
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+```yaml
+paths:
+  /users:
+    get:
+      security:
+        - bearerAuth: []
+      summary: Retrieve user list
+      responses:
+        '200':
+          description: OK
+```
+
+This snippet shows how a `GET /users` endpoint is protected using a bearer token under OpenAPI spec. It also shows that only authenticated users will see a 200 OK response.
+</motion.div>
+
+## 🧠 Token Best Practices
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+- Always use HTTPS when sending tokens
+- Never expose tokens in URLs or client-side code
+- Use short token expirations and refresh mechanisms
+- Store tokens securely (e.g., in memory for browser apps, encrypted storage for servers)
+- Rotate compromised tokens immediately
+
+You can also scope tokens so they only apply to certain endpoints or actions. For instance, a token might allow `GET /users`, but not `DELETE /users`.
+
+If you are managing multiple roles (admin, user, guest), your API logic should restrict routes based on token claims, such as `role: admin` or `plan: premium`.
+</motion.div>
+
+## 🧠 Check Your Understanding
+
+<ApiTokenQuiz />
+
+## ✅ Summary and What’s Next
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+API tokens are your first layer of defense. They ensure that only authenticated clients can reach protected endpoints. Now that you understand how they work, and how to secure them in OpenAPI and requests, you are ready to look at what happens when users send too many requests at once.
+
+We will explore how <HoverExplain word="Rate Limits" definition="Rules that restrict the number of API requests a client can make in a given time window." /> help enforce fairness, protect infrastructure, and integrate directly with token-based access.
+</motion.div>
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
+👉 Continue to <Link to="/docs/api-reference/rate-limits">Rate Limits</Link>.
+</motion.div>

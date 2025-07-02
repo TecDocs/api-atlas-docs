@@ -1,0 +1,44 @@
+/* === JSONandYAML Component Shared Wrapper === */
+.yamljson-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* === Shared Code Styling === */
+.yamljson-codeBlock {
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid transparent;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+/* === Dark Mode === */
+html[data-theme='dark'] .yamljson-codeBlock {
+  background-color: #1a1a1a;
+  color: #cfd8dc;
+  border: 1px solid rgba(0, 120, 255, 0.3);
+  box-shadow: 0 0 10px rgba(0, 120, 255, 0.4);
+}
+
+/* === Light Mode === */
+html[data-theme='light'] .yamljson-codeBlock {
+  background-color: #fafafa;
+  color: #222;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.yamljson-caption {
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  color: var(--ifm-color-content-secondary);
+  font-style: italic;
+}

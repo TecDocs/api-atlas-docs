@@ -1,0 +1,129 @@
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import SwaggerEmbed from '@site/src/components/SwaggerEmbed';
+import RedocEmbed from '@site/src/components/RedocEmbed';
+import PostmanGifGallery from '@site/src/components/PostmanGifGallery';
+import Link from '@docusaurus/Link';
+
+# 🧪 Demo API
+
+## 🔍 Why Simulate APIs Without Backend Code?
+
+<motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+Not every API workflow begins with a functioning backend. In fast-paced development cycles, it's often smarter to build and test API calls **before** backend services are available. This is the core of <strong>mock-first development</strong>.
+
+This section introduces three essential tools for simulation and testing: <HoverExplain word="Postman" definition="A GUI client for sending HTTP requests to APIs and inspecting the results." />, <HoverExplain word="Swagger UI" definition="An interactive, browser-based API explorer that reads from OpenAPI specs." />, and <HoverExplain word="Redoc" definition="A scrollable, human-readable OpenAPI viewer perfect for docs and team handoffs." />.
+
+If you've completed the <Link to="/docs/welcome/quickstart">Quickstart Checklist</Link> and your <Link to="/docs/getting-started/requirements">environment is properly set up</Link>, you’re ready to explore your fake API spec in action, no backend required.
+</motion.div>
+
+---
+
+## 🧰 Tool Columns Overview
+
+<div style={{ overflowX: 'auto' }}>
+<table style={{ minWidth: '100%', textAlign: 'left' }}>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Use Case</th>
+<th>Interactive?</th>
+<th>Docs-Ready?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Postman</td>
+<td>Test requests and responses</td>
+<td>✅ Yes</td>
+<td>❌ No</td>
+</tr>
+<tr>
+<td>Swagger UI</td>
+<td>In-browser endpoint testing</td>
+<td>✅ Yes</td>
+<td>⚠️ Somewhat</td>
+</tr>
+<tr>
+<td>Redoc</td>
+<td>Polished reference doc</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td>Mockoon</td>
+<td>Run fake server locally</td>
+<td>✅ Yes</td>
+<td>⚠️ Dev-only</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+These tools don't replace one another, they complement each phase of development. Use Postman for hands-on validation, Swagger for QA-ready tests, and Redoc for clean, public-facing references.
+</motion.div>
+
+---
+
+## 📮 Postman Walkthrough (GET & POST)
+
+<PostmanGifGallery />
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+In the first frame, we set up the HTTP environment, which is necessary to interact with endpoints via HTTP calls like <strong>"Put"</strong> or <strong>"Get"</strong>.
+
+Then, a <code>GET /users</code> call returns mock user data, letting us verify headers, query params, and status codes. The next frame shows a <code>POST /users</code> call with a full JSON body and auth headers.
+
+Postman highlights spec mismatches, missing fields, and helps you test different edge cases, even if your backend isn’t finished yet.
+</motion.div>
+
+---
+
+## 🚀 Swagger UI Playground
+
+<div style={{ marginBottom: '2rem' }}>
+  <SwaggerEmbed url="/fake-spec.yaml" />
+</div>
+
+<div style={{ textAlign: 'center', fontSize: '0.9rem', marginTop: '-0.5rem', marginBottom: '2.5rem', color: '#888' }}>
+  <em>Figure 2. Swagger UI, Interactive OpenAPI explorer with "Try It Out"</em>
+</div>
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+Swagger UI reads your <code>openapi.yaml</code> and turns it into a live, testable interface. You can expand each endpoint, view its required parameters, and send actual requests directly from the browser.
+
+It’s useful for front-end teams testing endpoints, QA analysts validating schemas, and developers catching spec errors. Swagger loads from <code>http://localhost:3000</code> and helps detect 401 errors, token problems, or malformed JSON formatting.
+</motion.div>
+
+---
+
+## 📘 Redoc: Clean Docs for Real Users
+
+<div style={{ marginBottom: '2rem' }}>
+  <RedocEmbed url="/fake-spec.yaml" />
+</div>
+
+<div style={{ textAlign: 'center', fontSize: '0.9rem', marginTop: '-0.5rem', marginBottom: '2.5rem', color: '#888' }}>
+  <em>Figure 3. Redoc, Scrollable, developer-friendly API reference from OpenAPI spec</em>
+</div>
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+Redoc transforms the same OpenAPI spec into a beautifully organized reference guide. Unlike Swagger or Postman, Redoc isn’t meant for interaction, it’s built for clarity and structure.
+
+Perfect for product teams, onboarding docs, or audits, Redoc emphasizes categories, parameters, schema models, and required fields. Every endpoint becomes a clean, scrollable section, making it ideal for long-term documentation.
+</motion.div>
+
+---
+
+## ✅ Recap and Next Steps
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+You’ve now seen how to explore your API from three perspectives: simulation (Mockoon), testing (Postman), and reference (Swagger, Redoc). These tools enable full lifecycle development without a single line of backend code.
+
+By working with mock data and an OpenAPI-first mindset, you can validate behavior, test workflows, and share accurate specs, all before deployment. This is the power of API-first development.
+</motion.div>
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
+➡️ Continue to <Link to="/docs/getting-started/test-your-first-endpoint">Test Your First Endpoint</Link> to handle errors, simulate 400s or 500s, and confirm your mock API is fully usable in real-world scenarios.
+</motion.div>

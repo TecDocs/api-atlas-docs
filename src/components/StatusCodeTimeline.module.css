@@ -1,0 +1,42 @@
+.timelineWrapper {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 1.5rem 1rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  border: 1px solid;
+  scroll-behavior: smooth;
+}
+
+.timelineStep {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  min-width: 160px;
+  padding: 1.2rem;
+  margin-right: 1rem;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  transform-origin: center;
+}
+
+.timelineStep:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.timelineIcon {
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+}
+
+.timelineCode {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.timelineLabel {
+  font-size: 0.95rem;
+  margin-top: 0.4rem;
+  line-height: 1.3;
+}

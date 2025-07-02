@@ -1,0 +1,39 @@
+
+.swagger-gallery-wrapper {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: var(--shadow-style);
+  animation: float 3s ease-in-out infinite;
+}
+
+.swagger-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.swagger-tabs button {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 2px solid var(--text-color);
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.swagger-tabs button.active {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+
+.swagger-response {
+  font-family: monospace;
+  background-color: #1e1e1e;
+  color: #00ffcc;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}

@@ -1,0 +1,86 @@
+import { motion } from 'framer-motion';
+import Link from '@docusaurus/Link';
+import HoverExplain from '@site/src/components/HoverExplain';
+import Figure from '@site/src/components/Figure';
+
+# 🛍️ How-To-Use API Atlas
+
+<motion.h1
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+>
+  ## 🏠 How to Use API Atlas Like a Pro
+</motion.h1>
+
+<motion.p
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.3, duration: 0.6 }}
+>
+  Welcome to <HoverExplain word="API Atlas" definition="A modern documentation platform for APIs using OpenAPI, Swagger UI, and AKS integration." />. This site is your structured gateway to mastering API development, simulation, and deployment using professional-grade tools. API Atlas has been designed to help you learn rapidly, document accurately, and build confidently using real-world conventions.
+</motion.p>
+
+<motion.p
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.5, duration: 0.6 }}
+>
+  The documentation is divided into logical sections: onboarding, getting started, API reference, OpenAPI integration, DevOps deployment, and troubleshooting. If you're just beginning, head to the <HoverExplain word="Welcome & Onboarding" definition="Introductory docs that explain how to use the site and what to expect across each section." /> area to get up to speed. If you're experienced and want to skip ahead to a <HoverExplain word="Postman collection" definition="A downloadable set of API request templates to be imported and tested in Postman." />, you can use the sidebar to navigate directly.
+</motion.p>
+
+<motion.p
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.6, duration: 0.6 }}
+>
+  Most technical terms, such as <HoverExplain word="API" definition="Application Programming Interface — a way for software systems to communicate using requests and responses." />, <HoverExplain word="rate limit" definition="A restriction on how many requests a client can make to an API in a given time frame." />, and <HoverExplain word="token" definition="A credential used to authenticate users or systems making API requests." /> are either defined inline or revealed with hover tooltips. You will also encounter diagrams, short demo clips, and clearly labeled figures throughout the experience. Every visual component is structured to appear as you scroll, making learning highly interactive and easier to retain.
+</motion.p>
+
+<Figure
+  src="/img/docs-structure.png"
+  caption="Figure 1. Sidebar structure and navigation flow of API Atlas"
+  animation="fadeInOnScroll"
+  delay={0.4}
+  style={{ maxHeight: '300px' }}
+/>
+
+<motion.p
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.4, duration: 0.6 }}
+>
+  In the figure above, you can see the documentation’s structure. The first two categories, <strong>🎓 Welcome & Onboarding</strong> and <strong>🚀 Getting Started</strong>, are foundational. These include guides like <Link to="/docs/welcome/quickstart">Quickstart</Link> and <Link to="/docs/getting-started/requirements">Requirements</Link>, which ensure your development tools are properly aligned. From there, the documentation transitions into reference material, such as authentication schemes, endpoints, OpenAPI rendering tools, and AKS workflows.
+</motion.p>
+
+---
+
+## 🛍️ Navigating the Docs Effectively
+
+<motion.p
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.5, duration: 0.6 }}
+>
+  Each page follows a repeatable, user-focused layout: headline, long-form context (10 to 16 sentences), animated figure, transition block (4 to 8 sentences), and a summary. You will never have to jump tabs or guess where a feature is documented. For example, if you're debugging JSON or YAML errors, simply visit <Link to="/docs/faq/debugging-json-and-yaml">Debugging YAML And JSON</Link>. For cloud deployments, head to <Link to="/docs/devops/devops-aks-deployment">AKS Deployment</Link>. The sidebar supports deep linking across all categories, so you can move linearly or out of order depending on your need.
+</motion.p>
+
+<motion.p
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.6, duration: 0.6 }}
+>
+  Internal links are styled in green for high contrast, while terms that may be unfamiliar are embedded with hoverable tooltips. Every image or animation is labeled with a caption and figure number, so you can refer back to visuals without scrolling blindly. The goal is clarity and speed, we want you to find, learn, and apply each concept immediately.
+</motion.p>
+
+---
+
+## ✅ Summary
+
+<motion.p
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ delay: 0.7, duration: 0.6 }}
+>
+  You now know how API Atlas is structured, what terms mean, and how to explore it effectively. Start your journey with the <Link to="/docs/welcome/quickstart"><strong>Quickstart Checklist</strong></Link> to install your environment and preview your first live request. Once that’s complete, you’ll be ready to dive into OpenAPI usage and endpoint testing in <Link to="/docs/getting-started/test-your-first-endpoint">Test Your First Endpoint</Link>. Each section builds on the last, use it like a curriculum, or reference it like a playbook.
+</motion.p>

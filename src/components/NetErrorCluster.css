@@ -1,0 +1,24 @@
+
+.net-error-cluster {
+  padding: 1.5rem;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(0, 150, 255, 0.2);
+  background-color: var(--ifm-background-surface-color);
+  margin-bottom: 2rem;
+}
+
+.cluster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.node {
+  padding: 0.9rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(0, 120, 255, 0.25);
+}

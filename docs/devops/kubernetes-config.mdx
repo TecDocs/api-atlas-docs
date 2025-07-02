@@ -1,0 +1,118 @@
+---
+id: kubernetes-config
+sidebar_label: ⚙️ Kubernetes Config
+title: Kubernetes Configuration Deep Dive
+---
+
+import { motion } from 'framer-motion';
+import YAMLPlayground from '@site/src/components/YAMLPlayground';
+import K8sConceptTimeline from '@site/src/components/K8sConceptTimeline';
+import AksConfigFlow from '@site/src/components/AksConfigFlow';
+import HoverExplain from '@site/src/components/HoverExplain';
+
+# ⚙️ Kubernetes Config
+
+<motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<p>
+Welcome to the core of Kubernetes deployment logic. Now that you’ve seen how APIs move from <HoverExplain word="OpenAPI" definition="An open standard for defining RESTful APIs in a machine-readable format." /> spec to live deployments via AKS, we’re going one layer deeper; into the configurations that drive scaling, security, routing, and resilience. This section explains how Kubernetes manifests shape real infrastructure.
+</p>
+
+<p>
+This isn’t just about writing YAML; it’s about architecting predictable systems. When you define a <HoverExplain word="Deployment" definition="A Kubernetes object used to manage a replicated application, ensuring the desired number of pods are running." />, you're scripting the lifecycle of your services. When you bind an <HoverExplain word="Ingress" definition="An API object that manages external access to services, typically HTTP." />, you're deciding how users will find your app. And when you tune your <HoverExplain word="Horizontal Pod Autoscaler" definition="A controller that automatically scales the number of pods in a deployment based on observed CPU/memory usage." />, you're directly influencing cloud cost and performance.
+</p>
+
+<p>
+You'll explore how configs cascade; how a <HoverExplain word="ConfigMap" definition="An object containing non-confidential configuration data in key-value pairs." /> is mounted as an environment variable, or how a <HoverExplain word="Secret" definition="A Kubernetes object that stores sensitive data, such as passwords, OAuth tokens, and SSH keys." /> informs pod startup. You'll see how configs get injected, tested, validated, and most importantly, how they evolve. And you'll learn to manage them like code, complete with versioning and rollbacks.
+</p>
+
+<p>
+Whether you're deploying stateless microservices, running long-lived workers, or wiring up service meshes, configuration is the common denominator. Done right, it becomes a single source of truth; done wrong, it becomes the silent root of outages. This section gives you the mindset, vocabulary, and muscle memory to avoid the latter.
+</p>
+</motion.div>
+
+---
+
+## ⚙️ Interactive YAML Playground
+
+<p>To explore how YAML shapes deployment behavior, use the interactive playground below:</p>
+
+<YAMLPlayground />
+
+<p>
+Use the interactive playground above to compare base vs production-ready YAML configurations. Hover over any field for guidance, and notice how things like <code>livenessProbe</code>, <code>envFrom</code>, and <code>strategy</code> impact behavior.
+</p>
+
+<p>
+YAML is both a structure and a philosophy; declarative, readable, and portable. It lets teams define infrastructure in the same way they define code, tested, linted, and version-controlled. A minor misconfiguration in a <code>readinessProbe</code> or a missing <code>resource limit</code> can lead to unstable deployments or autoscaling failures. In production, understanding each block isn’t optional; it’s mission-critical.
+</p>
+
+<p>
+What makes a YAML config production-ready? Strong defaults, clear metadata, consistent labels, and modularity. You'll see these practices reflected in Helm charts and Kustomize bases. Start building the habit now of writing your YAML as if another engineer will inherit it tomorrow; because they often will.
+</p>
+
+---
+
+## 📈 API Lifecycle Recap Timeline
+
+<K8sConceptTimeline />
+
+<p>
+This horizontal timeline breaks down the journey from API spec to deployment, connecting each concept we’ve explored so far. The timeline reinforces sequencing; from writing your <HoverExplain word="OpenAPI spec" definition="A versioned contract that defines your REST API endpoints and schemas." />, testing with Postman, documenting in Redoc, to deploying using AKS with GitOps workflows. If you’ve followed this path, you’re building skills parallel to actual DevOps pipelines used by top tech companies.
+</p>
+
+<p>
+Understanding the relationship between code, infrastructure, and documentation is what makes a DevOps engineer truly effective. This timeline visually compresses that journey; showing that infrastructure is not a separate stage, but a continuous part of development.
+</p>
+
+---
+
+## 📊 Visual Flow: From Swagger to AKS Pods
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
+<p>
+Before diving into the specifics of Kubernetes resources like <HoverExplain word="ConfigMaps" definition="Configuration objects used to inject key-value pairs into pods without baking them into images." /> or <HoverExplain word="RBAC" definition="Role-Based Access Control, used to restrict or permit user actions within a Kubernetes cluster." />, it’s important to understand how everything comes together from a workflow standpoint. This visual overview provides the connective tissue; how a static OpenAPI spec becomes a dynamic containerized service through configuration and automation.
+</p>
+<p>
+Most workflows begin with a <HoverExplain word="Swagger JSON" definition="A legacy or alternate format of the OpenAPI spec, often auto-generated by documentation tools." /> pushed to <HoverExplain word="GitHub" definition="A version control platform used as the source of truth in GitOps workflows." />, where infrastructure as code is stored and monitored. From there, CI/CD tools and GitOps platforms detect changes, inject environment variables, validate YAML templates, and deploy into an <HoverExplain word="AKS Cluster" definition="Azure's managed Kubernetes service that hosts pods and services." />. This means your documentation isn't just informative; it powers real deployments.
+</p>
+<p>
+These flows illustrate how declarative GitOps and procedural CI/CD strategies complement each other. Declarative GitOps ensures your cluster state matches what's defined in YAML; procedural CI/CD ensures validations and tests are passed before anything is applied. Together they provide auditability, speed, and confidence.
+</p>
+</motion.div>
+
+<AksConfigFlow />
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<p>
+Together, these flows represent the complete YAML lifecycle; defined, committed, validated, and deployed—powering every API instance in your cluster.
+</p>
+<p>
+Both flows demonstrate how OpenAPI and Swagger specs become part of an infrastructure automation story; either via CI pipelines that test and deploy, or GitOps systems that sync declarative YAML to production. Whether you’re using <HoverExplain word="ArgoCD" definition="A GitOps continuous delivery tool for Kubernetes." />, <HoverExplain word="FluxCD" definition="A GitOps tool that synchronizes changes in Git with Kubernetes clusters." />, or integrating Azure DevOps and GitHub Actions, the key takeaway is this: <strong>YAML is the universal language of Kubernetes, and automation is its backbone</strong>.
+</p>
+<p>
+This is where DevOps becomes tangible. You’re no longer writing theory; you’re controlling how real services scale, secure themselves, and recover from failure. And every line of config contributes to that orchestration. You’ll begin to recognize reusable patterns like Helm values, ingress rules, and RBAC bindings that are standard across cloud-native platforms.
+</p>
+</motion.div>
+
+---
+
+## 🧠 Summary & 📦 What’s Next
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+<p>
+You’ve now explored the full infrastructure journey; from defining your API in an OpenAPI spec, templating Kubernetes manifests, and triggering deployments via GitOps or CI/CD. But writing YAML alone doesn’t guarantee uptime, resilience, or secure execution. The real power of Kubernetes lies in the patterns that give your configuration meaning.
+</p>
+
+<p>
+So far, you've built the scaffolding; deployments, services, autoscalers, and ingress rules. Now it’s time to strengthen the core mechanics that keep everything running; health checks, access policies, and runtime scaling behaviors. These patterns aren't just optimizations; they’re essential safeguards against downtime, security risks, and runaway costs.
+</p>
+
+<p>
+In the next section, we’ll explore exactly how Kubernetes implements these behaviors through tools like RBAC, Probes, Secrets, and Horizontal Pod Autoscalers. You'll learn how to use them together to create self-healing, secure, and intelligently scaling clusters; the traits of every great production-grade system.
+</p>
+
+<p>
+Let’s go deeper into what makes Kubernetes production-ready; the operational patterns behind every deployment.
+</p>
+</motion.div>

@@ -1,0 +1,52 @@
+
+.company-usage-wrapper {
+  padding: 2rem;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.company-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.company-card {
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.company-card:hover {
+  transform: translateY(-5px);
+  background-color: #e0f2fe;
+}
+
+.company-card img {
+  height: 48px;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+}
+
+.company-card h4 {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: #1f2937;
+}
+
+.company-card p {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.figure-caption {
+  margin-top: 1rem;
+  font-style: italic;
+  color: #6b7280;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

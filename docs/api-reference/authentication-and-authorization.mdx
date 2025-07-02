@@ -1,0 +1,161 @@
+---
+id: authentication-and-authorization
+title: Authentication and Authorization
+sidebar_label: 🔐 Authentication & Authorization
+---
+
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import SpotlightCode from '@site/src/components/SpotlightCode';
+import StatusCodeTimeline from '@site/src/components/StatusCodeTimeline';
+import AnimatedErrorCode from '@site/src/components/AnimatedErrorCode';
+import AnimatedUsageTip from '@site/src/components/AnimatedUsageTip';
+import Link from '@docusaurus/Link';
+
+# 🔐 Authentication and Authorization
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+After covering <HoverExplain word="Status Codes" definition="Server responses that describe the result of an API request, such as 200 for success or 404 for not found." /> in the last section, we shift focus to one of the most foundational aspects of secure API design: authentication and authorization.
+
+Before any response can be returned, whether a success or a failure, your API must first determine if the user making the request is allowed to do so. This is where <HoverExplain word="Authentication" definition="Verifies the identity of a user or system making a request." /> and <HoverExplain word="Authorization" definition="Grants or denies access based on the authenticated user's permissions." /> come into play.
+
+Authentication answers the question, *Who are you?*  
+Authorization answers, *What are you allowed to do?*
+
+This dual mechanism ensures your endpoints are protected from unauthorized access, misuse, and accidental data exposure. Without proper enforcement, a client application could trigger sensitive operations or overwhelm internal systems.
+
+Understanding how these mechanisms work, and how to properly represent them in your <HoverExplain word="OpenAPI spec" definition="A machine-readable blueprint for describing your API endpoints, parameters, responses, and security requirements." />, is critical for any developer, architect, or technical writer working with APIs.
+</motion.div>
+
+---
+
+## 🔑 Common Authentication Types
+
+<StatusCodeTimeline
+  steps={[
+    { icon: '🔓', code: 'None', label: 'Open Access' },
+    { icon: '🪪', code: 'Basic', label: 'Username/Password' },
+    { icon: '🛡️', code: 'Bearer', label: 'Token Header' },
+    { icon: '🔁', code: 'OAuth2', label: 'Third-Party Consent' },
+    { icon: '🔐', code: 'API Key', label: 'Query or Header' },
+  ]}
+/>
+
+<p>Figure 1. Timeline showing common authentication types, ordered by simplicity and modernity.</p>
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+Open APIs may begin with no authentication, but this is rare and typically unsafe for production. Basic authentication uses a <HoverExplain word="base64-encoded" definition="A method of encoding data into ASCII characters, often used to safely transmit credentials." /> username and password combination; it is mostly used for internal tools and rarely recommended publicly.
+
+Bearer token authentication is the current industry standard. It requires clients to send a token, usually a <HoverExplain word="JWT" definition="JSON Web Token — a signed token that contains claims about the user and their permissions." />, in the request header. OAuth2 builds on this concept, supporting delegated permissions from trusted identity providers such as Google, GitHub, or Okta.
+
+Each method involves trade-offs in simplicity, security, and scalability. Your API’s audience, data sensitivity, and infrastructure will determine the best fit for your needs.
+</motion.div>
+
+---
+
+## 🧪 Securing Your OpenAPI Spec
+
+<SpotlightCode
+  title="Bearer Token Configuration in OpenAPI"
+  yamlCode={`components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []`}
+  jsonCode={`{
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}`}
+/>
+
+<p>Figure 2. Configuring global bearer token support in your OpenAPI 3.0 spec.</p>
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+This OpenAPI snippet defines a global security scheme using JWT bearer tokens. Once declared under `components.securitySchemes`, the token can be applied globally or selectively through the `security` object for individual endpoints.
+
+In <HoverExplain word="Swagger UI" definition="A visual documentation interface that lets users explore and test your API endpoints." />, this configuration displays a lock icon and enables the “Authorize” button, allowing users to paste in a token. From that point on, the token is automatically attached to all test calls in the interface.
+
+This pattern is essential when you're building interactive developer portals or generating secure client SDKs using OpenAPI tooling. It also works across tools like Redoc, and must be manually configured in Postman unless scripted.
+</motion.div>
+
+---
+
+## 🚨 What Happens When Auth Fails?
+
+<AnimatedErrorCode code={401} message="Unauthorized — Invalid or Missing Token" />
+<AnimatedErrorCode code={403} message="Forbidden — Valid Token, Wrong Scope" />
+
+<p>Figures 3 and 4: A 401 error appears when the Authorization header is missing or the token is malformed. A 403 error indicates the user is authenticated but lacks permission for the requested action.</p>
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+It is common for newer developers to confuse `401` and `403`. A `401` status means the system could not verify the user's identity, usually because the token is missing, expired, or invalid. A `403` indicates that the token is present and valid, but the user does not have permission to access the requested resource.
+
+Ensure your API responses clearly reflect this distinction. Messages should avoid exposing sensitive detail and instead guide users toward corrective action. During testing in Swagger or Postman, these codes will appear frequently, making proper feedback and logging essential for a great developer experience.
+</motion.div>
+
+---
+
+## 🧭 Understanding Token Scopes
+
+<SpotlightCode
+  title="JWT with Scoped Access"
+  yamlCode={`{
+  "sub": "user_abc",
+  "scope": "read:users write:billing",
+  "iat": 1718393011,
+  "exp": 1718493011
+}`}
+  jsonCode={`{
+  "sub": "user_abc",
+  "scope": "read:users write:billing",
+  "iat": 1718393011,
+  "exp": 1718493011
+}`}
+/>
+
+<p>Figure 5. A JWT payload containing scoped permissions that limit user access by category.</p>
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+In token-based systems, scopes are used to narrow a user’s access. The example above includes both read and write scopes, meaning the token holder can view user data and update billing records.
+
+Scopes should be validated during each request using <HoverExplain word="middleware" definition="Software that intercepts API requests to perform tasks like authentication, logging, or input validation before the request reaches its final handler." /> or policy layers. If a user lacks the necessary scope, your API should return a `403` response and, when appropriate, include a `WWW-Authenticate` header to inform the client of missing privileges.
+
+Remember, scopes are part of your API's permission model. Failing to check them is one of the most common security missteps, especially in internal or private APIs. Clarify whether your scopes follow OAuth2 conventions or are custom JWT claims, and document accordingly.
+</motion.div>
+
+<AnimatedUsageTip>
+Use Postman's Pre-request Scripts to automatically attach a bearer token before each request. This helps simulate real auth flows and avoids manual header setup, especially when working with short-lived or rotating tokens.
+</AnimatedUsageTip>
+
+---
+
+## ✅ Summary and What’s Next
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+Now that you've explored the core principles of authentication and authorization, you're equipped to secure your endpoints, define OpenAPI schemes, and guide consumers through a safe onboarding process.
+
+We covered:
+- Common authentication types (Bearer, OAuth2, API Keys)
+- Security definitions inside OpenAPI specs
+- JWT structure, payloads, and scopes
+- Key error codes (401 and 403) tied to auth failures
+
+These concepts form the backbone of secure API design. By implementing them properly, you help ensure that your platform is trustworthy, consistent, and resilient.
+
+In the next section, we’ll explore how endpoints are defined, grouped, and tested in live environments using tools like Swagger UI and Postman. You'll learn how to validate tokens in practice and structure your resources around secure, repeatable patterns.
+</motion.div>

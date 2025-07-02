@@ -1,0 +1,151 @@
+
+.gridWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.card {
+  background: var(--ifm-card-background);
+  border: 1px solid var(--ifm-toc-border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 260px;
+  text-align: center;
+  box-shadow: var(--ifm-global-shadow-lw);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--ifm-global-shadow-md);
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1rem;
+  object-fit: contain;
+  filter: var(--ifm-filter-image);
+}
+
+.dark .card {
+  background: #1e1e1e;
+  color: #f0f0f0;
+}
+
+.light .card {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+/* OpenApiCompanyShowcase.module.css */
+
+.company-showcase-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 1rem;
+}
+
+.company-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  padding: 1rem;
+  background-color: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  box-shadow: var(--ifm-global-shadow-lw);
+  transition: transform 0.3s ease;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.company-card:hover {
+  transform: translateY(-4px);
+}
+
+.company-logo {
+  height: 48px;
+  width: auto;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.2));
+}
+
+.company-name {
+  font-size: 0.85rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* OpenApiCompanyShowcase.module.css */
+
+.company-showcase-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 1rem;
+}
+
+.company-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  padding: 1rem;
+  background-color: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  box-shadow: var(--ifm-global-shadow-lw);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.company-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 12px rgba(87, 144, 255, 0.6), 0 0 20px rgba(87, 144, 255, 0.2);
+}
+
+.company-logo {
+  height: 48px;
+  width: auto;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.2));
+  transition: filter 0.3s ease;
+}
+
+.company-name {
+  font-size: 0.85rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

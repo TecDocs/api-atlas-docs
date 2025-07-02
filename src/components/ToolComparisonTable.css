@@ -1,0 +1,54 @@
+
+.tool-comparison-table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.tool-card {
+  width: 300px;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: var(--ifm-background-surface-color);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.tool-card.float-idle {
+  animation: floatIdle 5s ease-in-out infinite;
+}
+
+.tool-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+}
+
+.tool-card.dark {
+  background-color: #1c1c1e;
+  color: #f3f3f3;
+}
+
+.tool-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tool-icon {
+  width: 36px;
+  height: 36px;
+  filter: drop-shadow(0 0 6px rgba(0, 150, 255, 0.5));
+}
+
+@keyframes floatIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

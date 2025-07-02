@@ -1,0 +1,18 @@
+.timeline {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+.timelineItem {
+  background-color: var(--ifm-background-color);
+  padding: 1rem;
+  border-radius: 8px;
+  min-width: 180px;
+  text-align: center;
+  box-shadow: var(--ifm-global-shadow-lw);
+  transition: transform 0.3s ease;
+}
+.timelineItem:hover {
+  transform: scale(1.05);
+}

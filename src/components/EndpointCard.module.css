@@ -1,0 +1,67 @@
+
+.card {
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--ifm-color-content-secondary);
+  margin-bottom: 1rem;
+}
+
+.jsonBlock {
+  background: #282c34;
+  color: #ffffff;
+  padding: 1rem;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+}
+
+
+.endpoint-card {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  background-color: var(--ifm-background-color);
+  box-shadow: var(--ifm-global-shadow-md);
+  transition: background-color 0.3s ease;
+}
+
+.endpoint-url {
+  font-family: monospace;
+  color: var(--ifm-color-primary);
+}
+
+.code-block {
+  margin-top: 1rem;
+  background-color: var(--ifm-code-background);
+  color: var(--ifm-font-color-base-inverse);
+  border-radius: 8px;
+  overflow-x: auto;
+  padding: 1rem;
+  font-size: 0.85rem;
+  font-family: 'Courier New', Courier, monospace;
+  transition: background-color 0.3s ease;
+}
+
+[data-theme='light'] .code-block {
+  background-color: #f3f3f3;
+  color: #2d2d2d;
+}
+
+[data-theme='dark'] .code-block {
+  background-color: #1e1e1e;
+  color: #e6e6e6;
+}

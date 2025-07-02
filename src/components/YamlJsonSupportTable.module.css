@@ -1,0 +1,27 @@
+.tableWrapper {
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.customTable {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+.customTable th, .customTable td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.customTable th {
+  background-color: var(--ifm-color-emphasis-100);
+  font-weight: 600;
+}
+
+.customTable tr:nth-child(even) {
+  background-color: var(--ifm-color-emphasis-50);
+}

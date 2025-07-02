@@ -1,0 +1,134 @@
+---
+id: ci-cd-setup
+title: 🚀 CI/CD Setup & DevOps Flow
+sidebar_label: "🔁 CI/CD Setup"
+---
+
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import PipelineStageViewer from '@site/src/components/PipelineStageViewer';
+import SecretsInjectionFlow from '@site/src/components/SecretsInjectionFlow';
+import HelmDeployConfigurator from '@site/src/components/HelmDeployConfigurator';
+import CICDQuiz from '@site/src/components/CICDQuiz';
+
+# 🚀 CI/CD Setup & DevOps Flow
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+<p>
+In previous sections, we explored the declarative power of <HoverExplain word="YAML manifests" definition="Human-readable configuration files used to define Kubernetes resources like Deployments, Services, and Autoscalers." /> and how they orchestrate applications inside Kubernetes clusters. But writing great configuration is only half the story. The true engine behind modern DevOps lies in how we automate, validate, and deploy these configurations; enter the world of <strong>CI/CD</strong>.
+</p>
+
+<p>
+Continuous Integration (<HoverExplain word="CI" definition="A practice where developers integrate code into a shared repository frequently, triggering automated builds and tests." />) and Continuous Delivery (<HoverExplain word="CD" definition="The practice of automatically deploying validated builds to production or staging environments." />) aren’t just optional; they’re the gatekeepers of quality, security, and velocity. With the right pipelines, even complex microservice architectures can move quickly without sacrificing control.
+</p>
+
+<p>
+This section showcases how CI/CD pipelines automate enforcement of <HoverExplain word="RBAC policies" definition="Access control rules that define who can interact with which Kubernetes resources." />, validate <HoverExplain word="probes" definition="Kubernetes checks that determine pod health and readiness." />, inject secrets securely, and deploy Helm-templated configurations to Azure Kubernetes Service (AKS). These are not isolated tasks; they’re a cohesive flow.
+</p>
+
+<p>
+Imagine your pipeline as a production line: configs enter on one end, and a running application appears on the other. At each stage, gates and guards ensure correctness, enforce best practices, and reduce human error. In the paragraphs below, you’ll explore how this process unfolds in a real-world AKS setup.
+</p>
+
+</motion.div>
+
+---
+
+## ⚙️ Pipeline Overview: From Push to Pod
+
+<PipelineStageViewer />
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+<p>
+Let’s begin with the full lifecycle: a developer pushes a new Swagger or OpenAPI update. That push triggers a GitHub Action, which kicks off a pipeline that handles everything, from linting YAML and running tests, to validating readiness and enforcing Helm chart consistency.
+</p>
+
+<p>
+Each step in the <strong>PipelineStageViewer</strong> above highlights an essential checkpoint. Syntax validation prevents malformed YAML from shipping; static analysis catches security issues early. Helm chart testing ensures correct resource rendering; finally, deployment logic pushes the manifest to the AKS cluster, and probes confirm the pods are operational.
+</p>
+
+<p>
+This is not just automation; it’s automation with guarantees. By the time your YAML reaches production, it has passed through layers of scrutiny. Now, let’s examine one of the most sensitive stages of this journey: securely injecting secrets.
+</p>
+
+</motion.div>
+
+---
+
+## 🔐 Secrets Management in Pipelines
+
+<SecretsInjectionFlow />
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+<p>
+Secrets such as database passwords, API tokens, and SSH keys must never be hardcoded in your repository. This component demonstrates how CI/CD integrates with <strong>GitHub Secrets</strong>, <strong>Azure Key Vault</strong>, or <strong>HashiCorp Vault</strong> to dynamically pull and inject these secrets at build time.
+</p>
+
+<p>
+Notice how the flow avoids direct exposure: secrets are never logged or stored unencrypted. Instead, they are loaded as environment variables or mounted volumes into your Kubernetes pods. This is aligned with <HoverExplain word="12-Factor App" definition="A methodology for building scalable web apps, emphasizing separation of config from code." /> principles and prevents leaks across environments.
+</p>
+
+<p>
+Even more important: pipelines should validate that secrets are present, formatted correctly, and only injected where needed. This enforces the principle of least privilege. In the next step, we’ll explore how those secrets, and the rest of your app config, get packaged into a deployment artifact using Helm.
+</p>
+
+</motion.div>
+
+---
+
+## 🏠 Helm-Based Deployment Logic
+
+<HelmDeployConfigurator />
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+<p>
+<HoverExplain word="Helm" definition="A package manager for Kubernetes that lets you templatize and version control your YAML configurations." /> is the glue between raw config and production-grade delivery. It lets teams define variables, environments, and structure inside reusable charts; ensuring your dev, staging, and prod deployments stay in sync while remaining flexible.
+</p>
+
+<p>
+The configurator above shows how values change across environments. CI pipelines inject specific values into the Helm templates depending on the branch or target cluster. For example, a dev environment might use <code>replicas: 1</code> and test credentials, while prod deploys with full resource limits, probes, and aggressive autoscaling.
+</p>
+
+<p>
+This pattern not only boosts maintainability; it enables rollback. Each deployment becomes a versioned artifact, allowing CI/CD to revert changes instantly when things go wrong. Now that we’ve seen every layer from build to deploy, let’s tie it all together.
+</p>
+
+</motion.div>
+
+---
+
+## 🧪 CI/CD Knowledge Check
+
+<CICDQuiz />
+
+---
+
+## 🧠 Final Recap & 🚀 Scaling Ahead
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+<p>
+At this point, you’ve architected APIs, secured them with tokens, designed resilient Kubernetes configs, and connected every piece into a continuous integration and delivery chain. What began with OpenAPI specs and Postman tests has evolved into a full DevOps pipeline that supports real-world, production-grade workflows. You've moved from theory to infrastructure, from isolated files to cross-cutting automation systems that bridge dev, ops, and security.
+</p>
+
+<p>
+Through each section; whether writing: health probes, tuning autoscalers, or enforcing RBAC,you’ve been layering operational maturity into your API deployment strategy. These weren’t just features, they were production guardrails. Each layer has taught you to think not just about what your app does, but how it survives, scales, and heals under pressure. That mindset is what separates beginner YAML from true infrastructure-as-code.
+</p>
+
+<p>
+In the CI/CD section, we expanded that mindset into velocity. You learned how pipeline stages act as quality gates, how secrets flow through vaults into running pods, and how Helm enables reproducible, environment-aware deployment logic. This isn't just best practice; it’s the core operating rhythm of DevOps in cloud-native systems. The foundation is now in place.
+</p>
+
+<p>
+But delivering an API isn’t the same as scaling it. Teams that stop at deployment often fall short in the next phase: operational growth. That’s where GitOps repository structure, shared configuration strategies, and multi-service promotion pipelines come into play. You’ll need to think about config reuse, team ownership, and long-term system evolution. That’s exactly where we’re headed next.
+</p>
+
+<p>
+The final chapter of this DevOps track focuses on <strong>Scaling APIs</strong>. We’ll explore how to structure your GitOps repo for multi-environment delivery, how to manage branching and environments cleanly, and how to scale API delivery workflows across teams and clusters without creating bottlenecks. This isn’t just about handling traffic; it’s about scaling your practices, patterns, and people.
+</p>
+
+</motion.div>

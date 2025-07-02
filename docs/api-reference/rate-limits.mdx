@@ -1,0 +1,139 @@
+---
+id: rate-limits
+title: Rate Limits
+sidebar_label: 🥮 Rate Limits 
+---
+
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import FeatureColumn from '@site/src/components/FeatureColumn';
+import Link from '@docusaurus/Link';
+import RateLimitQuiz from '@site/src/components/RateLimitQuiz';
+
+# 🥮 Rate Limits
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+APIs are powerful, but they’re not infinite. Just like a toll booth limits how many cars can pass through each lane per minute, <strong>rate limits</strong> ensure that APIs remain stable, fair, and secure under load. If your API had no speed bump, one rogue script could take the entire system offline.
+
+After obtaining your <HoverExplain word="API token" definition="A secure string passed in headers to identify and authenticate the user making the request." />, and beginning to test authenticated endpoints like `/users/{id}`, you're now entering a shared highway, and rate limiting is your lane meter.
+
+Rate limits protect infrastructure, prioritize critical users, and help distinguish between real traffic and abuse. They work silently in the background, ensuring fair access to your endpoints. It’s one of the most critical backend systems, and yet one of the least visible to end users, until a limit is hit.
+
+Typical enforcement happens using headers like:
+- `X-RateLimit-Limit`
+- `X-RateLimit-Remaining`
+- `Retry-After`
+
+These headers act like traffic signs, letting clients know when to slow down or stop making requests temporarily.
+</motion.div>
+
+<FeatureColumn
+  items={[
+    { title: "Fair Usage Enforcement", description: "Ensure API bandwidth is distributed equitably across users and tiers." },
+    { title: "Security Guardrails", description: "Block brute-force attempts and scrape bots before they cause harm." },
+    { title: "Infrastructure Protection", description: "Shield database and services from unexpected request floods." },
+    { title: "Business Tier Differentiation", description: "Offer higher quotas to premium or enterprise customers." },
+    { title: "Predictable Performance", description: "Maintain response time consistency even at peak load." }
+  ]}
+/>
+
+## 📊 Visualizing Rate Limits in Action
+
+<div
+  style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '2rem',
+    marginBottom: '1rem'
+  }}
+>
+  <img
+    src="/rate-limit-demo.gif"
+    alt="Rate limit request handling demo"
+    style={{
+      maxWidth: '100%',
+      width: '100%',
+      maxHeight: '500px',
+      objectFit: 'contain',
+      borderRadius: '12px',
+      boxShadow: '0 8px 30px rgba(0, 0, 0, 0.1)',
+      transition: 'all 0.3s ease-in-out'
+    }}
+  />
+</div>
+
+<p><strong>Figure 1.</strong> Animated GIF showing request flow through an API and rejections triggered when limits are exceeded. Useful for understanding both token- and time-based logic patterns visually.</p>
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+Some APIs apply <strong>global limits</strong>, capping usage across all routes. Others use <strong>scoped limits</strong> tied to users, routes, IPs, or token types. For instance, `/public/articles` might allow 500 requests per hour, while `/admin/users` allows only 10.
+
+Rate limiting is often tightly coupled with <HoverExplain word="authentication" definition="The process of verifying the identity of a user or application, typically using tokens or keys." /> and <HoverExplain word="authorization" definition="The rules that determine what actions a user or app is allowed to perform." />, meaning only verified users may get higher quotas.
+
+Different algorithms are used to enforce limits:
+- <strong>Fixed Window</strong>: Allots requests in time blocks (e.g., 100/min)
+- <strong>Sliding Log</strong>: Tracks each timestamp; flexible, but storage-heavy
+- <strong>Leaky Bucket</strong>: Emits requests steadily; drops excess traffic
+- <strong>Token Bucket</strong>: Grants request tokens at intervals; fast, and burst-tolerant
+
+Rate limits don’t just defend your API, they make it more reliable. Think of them as an immune system for your endpoints, always active, mostly invisible, and essential during stress.
+</motion.div>
+
+<RateLimitQuiz 
+  question="Which of the following best describes the Token Bucket algorithm?"
+  options={[
+    "It emits requests at a fixed interval regardless of traffic",
+    "It counts requests within a sliding time window",
+    "It allows bursts by filling up tokens and depleting them with each request",
+    "It drops excess traffic permanently"
+  ]}
+  correctIndex={2}
+  explanation="The Token Bucket algorithm grants tokens at a fixed rate. Requests consume tokens, and if tokens are available, bursts are allowed. This makes it ideal for APIs with irregular traffic bursts."
+/>
+
+## 🧠 Extra Considerations
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+Rate limits help enforce business logic too. For example, a freemium app might limit `POST /transactions` to 5/hour for free users, but allow 100/hour for paid ones. Your limits, like your API design, reflect what kind of behavior you want to encourage.
+
+When integrating with tools like <HoverExplain word="Swagger UI" definition="A tool for visualizing and testing APIs based on OpenAPI specs." />, rate-limit hints or extensions can be embedded using vendor-specific tags (e.g., `x-rate-limit` or `x-throttle-policy`).
+
+Also, don’t forget testing: when writing Postman tests or CI workflows, simulate rate limits and verify your headers and retry behavior. Clients must gracefully back off when limits are hit, showing users a retry message rather than a crash.
+</motion.div>
+
+## ✅ Summary & What's Next
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+Rate limiting isn’t just a backend safeguard, it’s a gateway to real-world design thinking. The moment your API connects with external users, clients, or integrations, rate limits start shaping behavior, expectations, and business viability.
+
+They influence everything from pricing tiers and onboarding flows to user satisfaction and platform stability.
+
+Think of rate limits as invisible rules that guide how people <em>use</em> your product. Set them too low, and users get frustrated. Too high, and your infrastructure risks abuse. Done right, rate limits become the balance point between access and control, allowing trusted users to scale while protecting your system from runaway usage.
+
+In fact, some of the most effective platforms in the world use rate limits to create <strong>intentional usage boundaries</strong>. Stripe enforces different ceilings for webhooks versus APIs. GitHub offers elevated plans for partners based on specific use cases. Google Maps caps based on location type, and Twitter once allowed higher limits for verified developers building public dashboards.
+
+What these examples show is that rate limiting is <em>not just technical</em>, it’s deeply strategic. Every limit imposed reflects a design choice about what kind of experience you want to deliver and what kind of ecosystem you're supporting.
+
+By studying API use cases, you start to see <strong>patterns of behavior</strong> across industries:
+📿 Financial APIs that batch paystubs nightly  
+🏥 Healthcare APIs that sync patient records across time zones  
+
+
+Each of these scenarios places different demands on your system. And each one reshapes how you think about authentication, quotas, error messages, and performance tuning.
+
+Use cases also clarify <strong>what matters to different teams</strong>. For engineers, they help inform endpoint design. For product managers, they help define user segments. For legal or compliance teams, they outline privacy implications. And for support, they create a predictable map of problems to watch for.
+
+Ultimately, your job isn’t just to build a reliable API, it’s to <strong>build an API that makes sense in the real world</strong>. Rate limits, auth flows, retries, and pagination are all just tools. Use cases are how you decide when, where, and why to use them.
+
+So as we transition out of rate limiting, we’re going to explore how everything you’ve learned so far—status codes, tokens, auth headers, and usage patterns—comes together to serve actual business and user needs.
+
+In the next section, we’ll walk through a curated collection of real-world API use cases across finance, healthcare, aviation, education, and SaaS platforms. You’ll learn how different constraints emerge, how APIs adapt to scale, and how documentation can be tailored for each audience and scenario.
+
+This is where your knowledge becomes actionable—when concepts stop being theoretical and start mapping to real workflows. By the end of the next section, you’ll be equipped not just to <em>build</em> APIs, but to <strong>architect APIs with purpose</strong>, grounded in real human and business needs.
+</motion.div>
+
+---
+
+<motion.div initial={{ opacity: 0, y: 5 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+👉 Continue to <Link to="/docs/api-reference/use-cases">Use Cases</Link>
+</motion.div>

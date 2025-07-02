@@ -1,0 +1,8 @@
+.container, .card, .panel {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--ifm-global-shadow-md);
+}

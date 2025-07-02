@@ -1,0 +1,52 @@
+.errorBox {
+  background-color: var(--ifm-background-color);
+  border: 1.5px solid var(--ifm-color-primary);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease;
+  text-align: center;
+  color: var(--ifm-font-color-base);
+  font-family: 'Segoe UI', sans-serif;
+  animation: fadeInPop 0.6s ease;
+  cursor: default;
+}
+
+.errorBox:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.code {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ifm-color-danger);
+}
+
+.message {
+  font-size: 1.1rem;
+  margin-top: 0.3rem;
+}
+
+.hint {
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  color: var(--ifm-color-emphasis-500);
+  opacity: 0.8;
+}
+
+@keyframes fadeInPop {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

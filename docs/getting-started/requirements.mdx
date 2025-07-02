@@ -1,0 +1,137 @@
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import Link from '@docusaurus/Link';
+import Figure from '@site/src/components/Figure';
+import AnimatedRequirementList from '@site/src/components/AnimatedRequirementList';
+
+# ⚙️ Setting Up Your Environment
+
+## 🧭 From Quickstart to Environment Setup
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+If you've just completed the <Link to="/docs/welcome/quickstart">Quickstart Checklist</Link>, you’ve already installed the tools needed to simulate, test, and explore the fake-spec API. But software tooling is only one part of a healthy development experience. Without a stable environment, meaning your terminal, file system, port settings, YAML formatting, and networking rules are correctly configured, you’ll experience incomplete payloads, broken Swagger previews, silent Redoc failures, or inconsistent results in tools like Postman or Mockoon. This section expands beyond the UI and CLI, breaking down the environment you’ll need at the OS level with step-by-step install options for macOS, Windows, and Linux-based systems.
+</motion.p>
+
+---
+
+## 🛠️ Installing Node.js 18+ (⏱️ 2–3 min)
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.1, duration: 0.6 }}>
+Node.js powers many aspects of API development, including Swagger preview servers, mock tooling like Prism, and CI/CD pipelines. API Atlas assumes you are using <strong>Node.js version 18 or higher</strong>, since older versions lack full support for ES Modules and modern YAML parsing libraries. 
+</motion.p>
+
+- <strong>Windows</strong>: [Download Node.js](https://nodejs.org/en) and use the .msi installer  
+- <strong>macOS</strong>: Use Homebrew: <code>brew install node</code>  
+- <strong>Linux</strong>: Use your package manager (e.g., <code>sudo apt install nodejs</code> and <code>npm</code>)  
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.2, duration: 0.6 }}>
+You can confirm your installation by running <code>node -v</code> in your terminal. If the output shows <code>v18.x</code> or higher, you’re good to go. If not, uninstall any existing version and reinstall from the official site.
+</motion.p>
+
+---
+
+## 🔃 Git and GitHub Setup (⏱️ 1–2 min)
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.6 }}>
+Git allows you to track your API changes, commit updated OpenAPI specs, and push YAML files to your remote repository. GitHub integrates with popular tools like SwaggerHub, Stoplight, and Docusaurus for seamless deployment pipelines. If you’re not using version control yet, install Git today to enable versioned workflows and automated documentation builds.
+</motion.p>
+
+- <strong>Windows</strong>: [Install Git for Windows](https://git-scm.com/download/win)  
+- <strong>macOS</strong>: Git is included with Xcode Command Line Tools (<code>xcode-select --install</code>)  
+- <strong>Linux</strong>: Install with <code>sudo apt install git</code> or equivalent  
+
+---
+
+## 💻 Terminal or CLI Access (⏱️ 1–2 min)
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.6 }}>
+Your command line interface (CLI) is the control panel for everything you do with APIs. You’ll use it to run <code>curl</code> requests, launch Swagger mock servers, lint YAML files, and install dependencies. Mac and Linux users can use the built-in Terminal app; Windows users should install <a href="https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701">Windows Terminal</a> or use Git Bash for Unix-like behavior. You should be comfortable switching directories, running Node.js or Python scripts, and viewing error logs.
+</motion.p>
+
+---
+
+## 🔓 Open Ports (3000 or 5000) (⏱️ 1–2 min)
+
+<Figure src="/img/port-access-localhost.png" caption="Figure 1. Port requirements for local Swagger UI previews using localhost" animation="fadeInOnScroll" delay={0.5} />
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.6 }}>
+Swagger UI, along with many local dev servers, defaults to port 3000 or 5000. If either port is already in use, by Docker, React apps, or background services, your preview may fail silently without visible errors To check which processes are using your ports, run <code>lsof -i :3000</code> (macOS/Linux) or <code>netstat -aon | findstr :3000</code> (Windows), and then stop them with <code>kill -9 PID</code> or <code>taskkill /PID</code>. You can also change the default port in your Swagger configuration, although having open ports is preferred.
+</motion.p>
+
+---
+
+## 🌐 Internet Access & Firewall Rules (⏱️ 1–2 min)
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.6, duration: 0.6 }}>
+Make sure your machine has unrestricted access to the internet when fetching specs, using Swagger/Redoc embeds, or validating schema links. Some corporate networks, VPNs, or proxy settings may block <code>localhost</code> or <code>127.0.0.1</code> requests. If Swagger UI doesn’t load, check your browser console for CORS errors or failed schema fetches. If needed, temporarily disable firewalls or adjust your network settings to allow local loopback access.
+</motion.p>
+
+---
+
+## 🧹 YAML Linter Plugin (⏱️ 1–2 min)
+
+<Figure src="/img/yaml-error-formatting.png" caption="Figure 2. YAML formatting issues causing Swagger UI to break silently" animation="fadeInOnScroll" delay={0.7} />
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.7, duration: 0.6 }}>
+YAML syntax is whitespace-dependent. One misaligned colon, missing indent, or trailing space can cause the entire file to fail. Neither Swagger nor Redoc will show you a useful error message, they’ll just fail silently. Use a YAML linter plugin in VS Code or your IDE to validate before pushing changes. A linter will catch mistakes that aren’t visible by eye and prevent hours of debugging.
+</motion.p>
+
+```yaml
+# ❌ Broken YAML
+paths:
+  /employee/details
+    get:
+      summary: "Fetch employee data"
+      responses:
+        '200':
+         description: "Successful request"
+```
+
+---
+
+## 🔐 Authorization Tokens (⏱️ 1–2 min)
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.6 }}>
+Many endpoints in the fake-spec mock API require a token header such as <code>Authorization: Bearer {'{yourToken}'}</code>. These tokens can be hardcoded in Postman environments, added as query parameters, or injected through headers in Swagger UI. Without them, your requests will return 401 Unauthorized. You’ll find your token format in the <Link to="/docs/api-reference/api-token">Token Guide</Link> later, but ensure your client supports custom headers and secure storage first.
+</motion.p>
+
+---
+
+## 🧰 Animated Minimum Requirements
+
+<AnimatedRequirementList
+  items={[
+    <> <strong>Node.js 18+</strong>, required for running dev servers, CI scripts, and Swagger preview commands.</>,
+    <> <strong>Git + GitHub</strong>, used to sync OpenAPI schemas, manage CI workflows, and deploy updates.</>,
+    <> <strong>Terminal or CLI</strong>, essential for sending <code>curl</code> commands, installing packages, and debugging headers.</>,
+    <> <strong>Port 3000 or 5000 Open</strong>, required by Swagger UI, mock APIs, and React-based preview servers.</>,
+    <> <strong>Internet Access</strong>, enables schema retrieval from URLs and access to hosted Swagger/Redoc instances.</>,
+    <> <strong>YAML Linter Plugin</strong>, validates indentation, character encoding, and references in your OpenAPI files.</>,
+    <> <strong>Authorization Token</strong>, needed for authenticated requests across endpoints like <code>/payroll/export</code>.</>,
+  ]}
+/>
+
+<Figure src="/img/requirements-environment.png" caption="Figure 3. Recommended dev environment with CLI, VS Code, Swagger, and GitHub sync" animation="fadeInOnScroll" delay={0.9} />
+
+---
+
+## ✅ Final Checklist 
+
+<ul>
+  <li>✅ Node.js 18+ installed</li>
+  <li>✅ GitHub repo access confirmed</li>
+  <li>✅ CLI terminal working and accessible</li>
+  <li>✅ Ports 3000 or 5000 not in use</li>
+  <li>✅ Internet and schema URLs reachable</li>
+  <li>✅ YAML linter installed in VS Code or IDE</li>
+  <li>✅ Token header ready for authenticated routes</li>
+</ul>
+
+## 📦 Summary and Moving On to Demo API
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 1.0, duration: 0.6 }}>
+Your setup is now fully aligned with the tools, specs, and workflows used throughout API Atlas. If any tool above is missing, incomplete, or misconfigured, Swagger and Postman will fail silently or return HTTP status errors that are hard to interpret. With a strong environment in place, you’ll be prepared to test every endpoint, simulate workflows, and debug integrations in a controlled and efficient way.
+</motion.p>
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 1.1, duration: 0.6 }}>
+➡️ Continue to the <Link to="/docs/getting-started/demo-api">Demo API</Link> to simulate your first user request and observe the live behavior of our mock endpoints. You’ll put your full setup to the test. You will be launching tools like Swagger, sending your first request with headers, and validating response objects using real payloads. From this point forward, all features assume a fully working environment, including mock servers, schema previews, token headers, and YAML parsing. Double-check your setup now to avoid hard-to-trace issues later on
+</motion.p>

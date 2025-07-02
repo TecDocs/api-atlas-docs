@@ -1,0 +1,42 @@
+
+.quizContainer {
+  background-color: var(--ifm-background-surface-color);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.questionBlock {
+  margin-bottom: 2rem;
+}
+
+.choice {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  margin: 0.25rem 0;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.choice:hover {
+  background: var(--ifm-color-emphasis-200);
+}
+
+.correct {
+  background-color: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+
+.incorrect {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+  color: #721c24;
+}
+
+.explanation {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}

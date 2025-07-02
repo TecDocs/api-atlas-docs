@@ -1,0 +1,134 @@
+---
+id: endpoints-overview
+title: Endpoints and Resources
+sidebar_label: 🔗 Endpoints and Resources
+---
+
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import EndpointCard from '@site/src/components/EndpointCard';
+import ResourceGrid from '@site/src/components/ResourceGrid';
+import SwaggerEmbed from '@site/src/components/SwaggerEmbed';
+import AnimatedUsageTip from '@site/src/components/AnimatedUsageTip';
+import EndpointQuiz from '@site/src/components/EndpointQuiz';
+import Link from '@docusaurus/Link';
+
+# 🔗 Endpoints and Resources
+
+<motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+APIs expose their power through <HoverExplain word="endpoints" definition="Specific URL paths that clients call to retrieve, create, update, or delete resources." />. Think of each endpoint as a door into a service. What lies behind that door is the <HoverExplain word="resource" definition="The object or data entity exposed by the API, such as users, documents, tasks, or products." />, and the method you use to open it defines what you’re allowed to do.
+
+If you’ve already explored <Link to="/docs/api-reference/authentication-and-authorization">Authentication and Authorization</Link>, you’ve seen how endpoints are protected through mechanisms like tokens and scopes. But now it’s time to focus on the **structure** of those endpoints—how you name them, organize them, and make them intuitive to use.
+
+REST APIs reward consistency. A well-designed API reduces onboarding time, eliminates guesswork, and builds trust with frontend teams, integrators, and third-party developers. If you’ve ever wrestled with endpoints like `/getUserInfo2`, you’ll appreciate the elegance of `/users/{id}`. Clean endpoints aren't just about aesthetics; they’re foundational to automation, client SDK generation, security, and discoverability.
+
+Let’s walk through common endpoint patterns that demonstrate how simple naming principles make an API feel scalable, trustworthy, and professional.
+</motion.div>
+
+---
+
+## 📬 Common Endpoint Patterns
+
+<EndpointCard />
+
+<p><strong>Figure 1.</strong> <em>Common RESTful patterns for endpoints</em> using typical methods like GET, POST, and DELETE with human-readable, nested, and consistent paths.</p>
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+REST APIs gain their power from clarity and convention. These sample structures showcase how predictable naming leads to readable, testable, and scalable endpoints:
+
+- `/users` → list or create users  
+- `/users/{id}` → retrieve, update, or delete a single user  
+- `/users/{id}/roles` → sub-resources or nested relationships  
+- `/login` → authentication route  
+- `/search?q=value` → filtered or parameterized queries  
+
+Combined with <HoverExplain word="HTTP status codes" definition="Numeric codes that indicate the result of an HTTP request, like 200 for success or 401 for unauthorized." />, these endpoints form the backbone of consistent client-server interactions. Tools like Swagger and Postman rely on clean, semantic paths to generate usable test cases and mock services.
+
+RESTful APIs work best when they follow a **noun-based** URL scheme and use the HTTP method to express action. For example, use `POST /users` to create a new user—not `/createNewUser`. The method already tells the story; your URL should represent the **resource**, not the operation.
+</motion.div>
+
+<EndpointQuiz
+  question="Which of the following is NOT a RESTful best practice?"
+  options={[
+    "/users",
+    "/users/{id}/roles",
+    "/createNewUser",
+    "/users/{id}"
+  ]}
+  correctIndex={2}
+  explanation="RESTful APIs should avoid verbs in URLs. The HTTP method already defines the action, so use '/users' with POST instead of '/createNewUser'."
+/>
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+That leads us to a natural follow-up question: how do we organize dozens—or even hundreds—of endpoints so that they scale across teams and services?
+</motion.div>
+
+---
+
+## 🗂️ Resource Grouping and Naming
+
+<ResourceGrid resources={[
+  { category: 'Authentication', routes: ['/login', '/logout', '/refresh-token'] },
+  { category: 'User Management', routes: ['/users', '/users/{id}', '/users/{id}/roles'] },
+  { category: 'Payments', routes: ['/invoices', '/payments', '/subscriptions'] },
+  { category: 'Content', routes: ['/documents', '/uploads', '/media'] }
+]} />
+
+<p><strong>Figure 2.</strong> <em>Grouped resource categories</em> using <code>ResourceGrid</code> to show how logical grouping improves clarity, security, and developer productivity.</p>
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+As your API grows, organization becomes essential. Flat lists of ungrouped endpoints lead to confusion and slower onboarding. Grouping routes by function—like Authentication, Payments, and Content—provides clarity and helps developers understand your architecture at a glance.
+
+Here are examples of typical API groups:
+
+- **Authentication** → `/login`, `/logout`, `/refresh-token`
+- **User Management** → `/users`, `/users/{id}`, `/users/{id}/roles`
+- **Payments** → `/invoices`, `/subscriptions`, `/refunds`
+- **Content** → `/documents`, `/uploads`, `/media`
+
+These groupings aren’t just for human readability—they improve tool integration. In <HoverExplain word="Swagger UI" definition="A visual interface that lets you explore, authorize, and test your API endpoints interactively." /> and Redoc, grouped routes appear as collapsible sections, making large APIs easier to navigate and test.
+
+Grouping also enables shared security logic. You can enforce <HoverExplain word="RBAC" definition="Role-Based Access Control — a system that restricts access based on user roles and assigned permissions." /> rules on `/admin/*`, or require tokens for `/user/*`.
+
+Follow these naming rules to keep your API predictable:
+- Use **plural nouns** (`/projects`, not `/project`)  
+- Stick to **lowercase** only  
+- Avoid dashes or underscores in paths  
+- Never include verbs in URLs—the method handles that
+
+Consistency is more than aesthetic; it improves tooling, reduces bugs, and removes guesswork.
+</motion.div>
+
+---
+
+## 🧪 Try the Endpoints Live
+
+<SwaggerEmbed url="/endpoints-demo.yaml" />
+
+<p><strong>Figure 3.</strong> Embedded Swagger UI loaded from a local OpenAPI file. You can explore routes and test them in-browser using the Try It Out button, even without a live backend.</p>
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+This embedded Swagger UI demonstrates how endpoints look in practice. Even if the backend isn’t running, you can simulate requests, explore parameter inputs, and see response schemas—all through a local OpenAPI spec.
+
+If you want live behavior, tools like [Mockoon](https://mockoon.com) let you host mock responses from a static YAML spec. Just point Swagger at `http://localhost:3000`, and you’ll see working requests even before your real server is online.
+</motion.div>
+
+<AnimatedUsageTip>
+💡 To simulate live responses, run <strong>Mockoon</strong> locally on port <code>3000</code> and connect Swagger to your mock server. This allows full request simulation without needing a deployed API.
+</AnimatedUsageTip>
+
+---
+
+## ✅ Summary and What’s Next
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+You’ve now learned how to name, group, and structure endpoints using RESTful best practices. Clean naming and thoughtful grouping reduce ambiguity, improve testability, and support better documentation across your entire platform.
+
+Endpoints define <strong>what</strong> a user can request. But that leaves one big question: <strong>who</strong> is allowed to make those requests, and how do we enforce it?
+
+In the next section, we’ll dive into <HoverExplain word="API tokens" definition="Authentication credentials sent in a header or cookie to verify access to private API endpoints." />, including how to scope, validate, and issue tokens that protect your API at every layer.
+</motion.div>
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
+👉 Continue to <Link to="/docs/api-reference/api-token">API Token</Link>.
+</motion.div>

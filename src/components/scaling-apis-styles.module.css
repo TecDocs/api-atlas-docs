@@ -1,0 +1,24 @@
+
+.visualizer, .matrix, .checklist {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--ifm-background-surface-color);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+.matrix table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.matrix th, .matrix td {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  padding: 0.5rem;
+}
+.checklist ul {
+  list-style: none;
+  padding-left: 1rem;
+}
+.checklist li::before {
+  content: "🟢";
+  padding-right: 0.5rem;
+}

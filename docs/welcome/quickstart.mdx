@@ -1,0 +1,108 @@
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import Link from '@docusaurus/Link';
+
+# 🚀 Quick-Start Checklist
+
+## 🎯 Why This Step Matters
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+Before you can simulate, test, or document anything inside API Atlas, your tools need to be aligned with a standard, modern API workflow. This page exists to eliminate guesswork and set you up with a production-grade environment that mirrors what real teams use when deploying, documenting, and debugging APIs at scale.
+
+ A mock-first approach depends entirely on well-configured tools. If you're missing even one of the core applications introduced below, your API calls may silently fail, documentation previews may refuse to load, or local servers may bind to incorrect ports without notice. Inconsistent environments are one of the biggest causes of onboarding friction for developers and tech writers alike, so we take this stage seriously. Even if you’ve worked with OpenAPI before, following this checklist ensures that Swagger UI, Postman, Mockoon, and Redoc will all function seamlessly when called upon in the next phase.
+</motion.p>
+
+---
+
+## 🧰 What You’ll Be Using and Why
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.2, duration: 0.6 }}>
+You’ll be working with a carefully chosen set of tools that simulate what large engineering teams use in a modern API pipeline. We’ve included both graphical interfaces and command-line tools so you can test your API contract in different ways. <HoverExplain word="Postman" definition="A GUI-based client for sending HTTP requests, organizing API calls into collections, and validating response behavior." /> will allow you to test endpoints visually with custom payloads, token authentication, and environment switching. <HoverExplain word="Swagger UI" definition="A browser-based OpenAPI interpreter that allows interactive API testing and documentation rendering." /> gives you live documentation tied directly to your OpenAPI file, and supports executing real requests using the Try It Out feature.
+
+ <HoverExplain word="Mockoon" definition="A local mock server that simulates endpoint behavior and returns pre-defined responses based on OpenAPI specs." /> lets you run your API locally with complete control over headers, response delays, and error codes. Finally, <HoverExplain word="Redoc" definition="A human-readable OpenAPI renderer that transforms your YAML file into scrollable, semantic documentation." /> offers a beautiful way to visualize your endpoints and schemas. These tools are complemented by optional editors and validators like <HoverExplain word="VS Code" definition="A developer-focused code editor that supports YAML validation, API linting, Git integration, and extension-based workflows." />, <HoverExplain word="YAML linters" definition="Tools that scan your OpenAPI files for formatting or syntax errors before testing or rendering begins." />, and <HoverExplain word="Git" definition="A version control system used to sync and share code or documentation across distributed teams." />. If used together, they form a complete, contract-driven development pipeline that can simulate and validate complex API behavior without deploying to a live environment.
+</motion.p>
+
+---
+
+## 📁 What You’ll Work With
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.6 }}>
+At the center of API Atlas is a small, but powerful file called <code>fake-spec.yaml</code>. This is your training ground, a real OpenAPI 3.0 specification with two mock endpoints: <code>GET /users</code> and <code>POST /users</code>. The <code>GET</code> route returns an array of user objects with attributes like name, email, and ID. The <code>POST</code> route accepts a simple payload containing <code>name</code> and <code>email</code>, and returns a simulated response using a reusable schema. The spec file also defines common parameters, schema definitions, examples, tags, and error types.
+
+ It is intentionally lightweight, but provides just enough coverage for you to explore response validation, request formatting, authentication, and OpenAPI-based documentation patterns. Once you’ve imported this spec into your tools, you’ll be able to send requests, validate schema contracts, preview headers, and debug common YAML issues, all using a local mock server, not a deployed backend. By the time you’re done working with <code>fake-spec.yaml</code>, you’ll understand how a single OpenAPI file can power entire workflows for frontend developers, backend teams, QA testers, product managers, and technical writers alike. This file will be used in every remaining section of API Atlas.
+</motion.p>
+
+---
+
+## 🔧 Tool Downloads and Installation Checklist
+
+### 🧪 Mockoon (Local API Server)
+
+- [Download Mockoon](https://mockoon.com/download) and install the desktop application  
+- Once installed, launch the app and click “Import OpenAPI” from the menu  
+- Choose your <code>fake-spec.yaml</code> file and ensure the server runs on <code>http://localhost:3000</code>  
+- Start the server and confirm it returns mock responses on the configured routes
+
+<em>🕒 Estimated time: 3–5 minutes</em>
+
+### 🧪 Postman (Testing Client)
+
+- [Download Postman](https://www.postman.com/downloads/) and log in using a free account  
+- In Postman, create a new environment called <strong>Local API</strong>  
+- Add a new variable named baseUrl, with the initial and current value set to <code>http://localhost:3000</code>  
+- Then, in your requests, use baseUrl to dynamically point to your mock server  
+- Import the OpenAPI schema into a collection or manually test the <code>/users</code> endpoints  
+- Enable schema validation and toggle headers to explore error handling
+
+<em>🕒 Estimated time: 4–6 minutes</em>
+
+### 🧪 Swagger UI & Redoc (Interactive, Visual Docs)
+
+- No installation required  
+- Both tools are embedded directly in API Atlas  
+- You’ll begin using Swagger and Redoc in the next two sections:  
+  <Link to="/docs/getting-started/demo-api"><strong>Create Your Demo API</strong></Link>  
+  <Link to="/docs/getting-started/test-your-first-endpoint"><strong>Test Your First Endpoint</strong></Link>
+
+<em>🕒 Estimated time: 1 minute</em>
+
+### 💻 VS Code (Editor for YAML and Markdown)
+
+- [Download VS Code](https://code.visualstudio.com/) if not already installed  
+- Install the <code>YAML</code>, <code>Prettier</code>, and <code>OpenAPI Linter</code> extensions  
+- Open your <code>fake-spec.yaml</code> file to verify formatting, indentation, and $ref paths  
+- Use the terminal inside VS Code to run curl commands, Git operations, or YAML linters
+
+<em>🕒 Estimated time: 5–8 minutes</em>
+
+### 🛠️ Optional CLI Tools
+
+- <strong>curl</strong>, install via Homebrew or Linux package manager  
+- <strong>Git</strong>, install via [git-scm.com](https://git-scm.com) if not already configured  
+- <strong>Node.js (18+)</strong>, required for certain Swagger plugins and API tooling later in the DevOps section
+
+<em>🕒 Estimated time: 5–10 minutes (if needed)</em>
+
+---
+
+## 🧭 What Comes Next
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.6, duration: 0.6 }}>
+Now that your toolchain is installed, your system is aligned with a real-world API simulation workflow. You’ve installed a mock server, a graphical API testing client, an OpenAPI-rendering UI, and a code editor capable of linting and validating structured data.
+
+ You’re almost ready to test your first endpoint. But before we begin that process, we need to address a critical piece of the puzzle, your environment. Your tools may be installed, but if your system ports are blocked, your token isn't configured, or your YAML linter is disabled, you’ll still hit silent blockers in the next section. That’s why we recommend visiting the next section first: <Link to="/docs/getting-started/requirements"><strong>Setting Up Your Environment</strong></Link>. This ensures everything from curl to GitHub access is ready to support your mock-first development process.
+</motion.p>
+
+---
+
+## ✅ Final Summary
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.6 }}>
+You’ve completed the setup phase that powers the rest of API Atlas. This isn’t just a prep step, it’s a simulation of how real API teams prototype, test, and publish production-grade contracts. With Mockoon, Postman, Swagger UI, Redoc, and VS Code all installed and ready, your system is now capable of authoring, testing, and documenting OpenAPI-powered endpoints.
+
+ In the sections ahead, you’ll use this stack to simulate live interactions, preview your endpoints with zero backend code, and validate every step of your documentation process from inside your editor or browser. This is how modern APIs are built.
+</motion.p>
+
+<motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 1.0, duration: 0.6 }}>
+➡️ Continue to <Link to="/docs/getting-started/requirements"><strong>Setting Up Your Environment</strong></Link> to finish configuring your ports, token, CLI, and linter settings before running your first API call.
+</motion.p>

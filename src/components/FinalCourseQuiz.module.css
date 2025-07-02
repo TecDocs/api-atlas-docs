@@ -1,0 +1,119 @@
+
+/* Final Course Quiz Styles */
+
+/* Root container */
+.final-course-quiz {
+  background-color: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Header style */
+.final-course-quiz h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+/* Each question block */
+.quiz-question {
+  margin-bottom: 1.5rem;
+}
+
+/* Question text */
+.question {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-color-content);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.question::before {
+  content: "🧠";
+  font-size: 1.2rem;
+}
+
+/* Answer options */
+.options label {
+  display: block;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  color: var(--ifm-font-color-base, #e0e0e0);
+  transition: background-color 0.2s, border 0.2s;
+}
+
+.options label:hover {
+  background-color: var(--ifm-color-emphasis-100);
+  box-shadow: 0 0 8px rgba(0, 136, 255, 0.25);
+  border-color: var(--ifm-color-primary);
+}
+
+.options input {
+  margin-right: 8px;
+}
+
+/* Selected answer */
+.selected {
+  border-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-primary-lightest);
+}
+
+/* Correct answer */
+.correct {
+  border-color: var(--ifm-color-success);
+  background-color: var(--ifm-color-success-contrast-background);
+  color: var(--ifm-color-success);
+  font-weight: bold;
+}
+
+/* Incorrect answer */
+.incorrect {
+  border-color: var(--ifm-color-danger);
+  background-color: var(--ifm-color-danger-contrast-background);
+  color: var(--ifm-color-danger);
+  font-weight: bold;
+  text-decoration: line-through;
+}
+
+/* Submit button */
+.submit-btn {
+  background-color: var(--ifm-color-primary);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: var(--ifm-color-primary-dark);
+}
+
+/* Result display */
+.results {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ifm-color-content);
+  margin-top: 1rem;
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--ifm-background-surface-color);
+  border-radius: 8px;
+  box-shadow: inset 0 0 6px rgba(0, 136, 255, 0.15);
+}

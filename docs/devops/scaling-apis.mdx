@@ -1,0 +1,124 @@
+---
+id: scaling-apis
+title: 📈 Scaling APIs Across Teams
+sidebar_label: "📈 Scaling APIs"
+---
+
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import GitOpsDirectoryViewer from '@site/src/components/GitOpsDirectoryViewer';
+import MultiClusterDiagram from '@site/src/components/MultiClusterDiagram';
+import BranchStrategyFlow from '@site/src/components/BranchStrategyFlow';
+import ScalingApisQuiz from '@site/src/components/ScalingApisQuiz';
+
+# 📈 Scaling APIs Across Teams
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+<p>
+Welcome to the final chapter of the Deployment & DevOps track. If you’ve made it this far, you’ve already tackled the core systems that power modern software delivery. From defining OpenAPI contracts to building production-ready Kubernetes clusters, you've transformed YAML into living, breathing infrastructure. Now, we’re stepping beyond deployment pipelines and into the realm of <strong>sustainable growth</strong>; how to scale APIs across teams, environments, and geographies without breaking things.
+</p>
+
+<p>
+As applications grow, so do the demands on their infrastructure. What works for a solo developer often collapses under the weight of teams, regions, and services. Scaling is about more than throughput, it's about structure. Just as microservices need message formats, DevOps needs operational blueprints. This section reveals how GitOps, cluster segmentation, and branching flows create that structure.
+</p>
+
+<p>
+We'll start by diving into GitOps directory structures, the base layer of scalable delivery. From there, we’ll branch into multi-cluster orchestration and promotion flows, tying everything back to CI/CD and Kubernetes logic from earlier sections. Let’s begin.
+</p>
+
+</motion.div>
+
+## 🗂️ GitOps Directory Structure
+
+<GitOpsDirectoryViewer />
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+<p>
+A well-structured GitOps repo is like a city blueprint. Zones are clearly marked, utilities are shared but separated, and every layer can evolve independently. The directory viewer above reveals this model in practice: <code>/base</code> for universal Helm templates, <code>/envs</code> for per-environment logic, and <code>/secrets</code> for isolated credentials.
+</p>
+
+<p>
+When a pipeline runs, it knows exactly where to look. Dev may override resource limits, staging might inject a new image tag, production ensures strict probes and RBAC. This follows the same logic you explored earlier when templating with <HoverExplain word="Helm" definition="The package manager for Kubernetes that supports reusable, versioned templates." /> and injecting secrets via your pipeline.
+</p>
+
+<p>
+This structure isn’t just clean, it’s enforceable. CI/CD systems can lint the layout, block missing values, and prevent drift. Before you scale clusters, you need scalable definitions. Now let’s widen our lens to handle multi-cluster delivery.
+</p>
+
+</motion.div>
+
+## 🌐 Multi-Cluster Delivery Strategy
+
+<MultiClusterDiagram />
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+<p>
+The diagram above maps how your GitOps system fans out into multiple clusters. Imagine your environments as branches on a tree. Git defines the trunk, and tools like <HoverExplain word="Flux" definition="A GitOps agent that continuously syncs Git state to Kubernetes." /> or <HoverExplain word="ArgoCD" definition="A declarative GitOps tool for Kubernetes." /> ensure each branch grows in harmony.
+</p>
+
+<p>
+Each cluster watches only its scope, prod-west, staging, or dev. Pipelines update Git, and Git defines cluster state. This separation reduces blast radius and supports fast rollbacks. It also aligns perfectly with what you learned in <code>ci-cd-setup</code>; pipelines modify Git, not the cluster directly. The cluster pulls trusted state.
+</p>
+
+<p>
+You’ve now scaled infrastructure horizontally. But change also moves vertically, through Git branches. Next, we’ll explore how promotion strategies enable confidence and control.
+</p>
+
+</motion.div>
+
+## 🌳 Branching & Promotion Strategy
+
+<BranchStrategyFlow />
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+<p>
+This promotion strategy shows how changes flow across branches. <code>feature/* </code> branches go to <code>dev</code> clusters, <code>release/*</code> moves to staging, and <code>main</code>? That’s your production trigger. This aligns directly with your CI/CD configuration and Helm overrides from <code>pipeline-stage-viewer</code> and <code>helm-deploy-configurator</code> earlier.
+</p>
+
+<p>
+Each branch acts as a quality gate. Features undergo linting and sandboxing, staging validates secrets and autoscaling, and production enforces policies. Git becomes more than version control, it becomes a policy engine. That’s what modern delivery needs.
+</p>
+
+<p>
+Now that you’ve seen how branches, clusters, and templates combine, let’s make sure the knowledge sticks with a recap quiz.
+</p>
+
+</motion.div>
+
+## 🧠 Scaling Recap Quiz
+
+<ScalingApisQuiz />
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+<p>
+This quiz challenges everything you’ve just covered, from GitOps layouts and Helm logic to pipeline gating and multi-cluster sync. Each question is scenario-based and reflects decisions you’ll make in real DevOps roles. Review the visuals and re-read earlier sections as needed.
+</p>
+
+<p>
+Every answer maps back to a concept we’ve animated, diagrammed, or demonstrated. Take your time. Mastery here unlocks resilient, scalable platform delivery.
+</p>
+
+</motion.div>
+
+## 🏁 Final Summary & Congratulations
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+
+<p>
+Congratulations on completing the <strong>Deployment & DevOps</strong> module of API Atlas. From foundational YAML to CI pipelines to scalable GitOps architecture, you’ve constructed the pillars of real-world delivery. This wasn’t surface-level theory, it was the blueprint for platform excellence.
+</p>
+
+<p>
+You’ve navigated Helm charts, secret flows, RBAC, probes, autoscaling, GitHub Actions, and GitOps branching, all while animating and validating every layer. Your system isn’t just deployable, it’s <strong>repeatable</strong>, <strong>observable</strong>, and <strong>scalable</strong>.
+</p>
+
+<p>
+Next up: <strong>Common Errors On Deployment</strong>. You’ve launched it. Can you support it? Let’s move into the <strong>Troubleshooting & FAQ</strong> section where we answer the toughest post-launch questions.
+</p>
+
+</motion.div>

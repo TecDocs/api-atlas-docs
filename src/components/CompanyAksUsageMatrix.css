@@ -1,0 +1,84 @@
+.aks-usage-matrix-wrapper {
+  padding: 2rem;
+  animation: matrixFadeIn 0.9s ease-in-out;
+}
+
+.aks-company-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+/* Unified card styling */
+.aks-matrix-card {
+  background-color: var(--ifm-background-surface-color, #fefce8);
+  border: 2px solid var(--ifm-color-primary-light, #facc15);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.aks-matrix-card:hover {
+  transform: scale(1.03);
+  background-color: var(--ifm-background-hover, #fff7d6);
+  box-shadow: 0 0 10px var(--ifm-color-primary-light, #facc15);
+}
+
+/* Company logo */
+.aks-logo-container img {
+  height: 60px;
+  width: 60px;
+  object-fit: contain;
+}
+
+/* Text container */
+.aks-matrix-info h4 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ifm-heading-color, #78350f);
+}
+
+.aks-matrix-info p {
+  font-size: 0.95rem;
+  color: var(--ifm-font-color-base, #92400e);
+  margin-top: 0.4rem;
+}
+
+/* Figure caption */
+.figure-caption {
+  margin-top: 1.5rem;
+  font-style: italic;
+  text-align: center;
+  color: var(--ifm-font-color-base, #78350f);
+}
+
+/* Light/Dark mode adaptive colors */
+@media (prefers-color-scheme: dark) {
+  .aks-matrix-card {
+    background-color: #1a1a1a;
+    border-color: #facc15;
+    box-shadow: 0 0 12px rgba(250, 204, 21, 0.3);
+  }
+
+  .aks-matrix-card:hover {
+    background-color: #222;
+    box-shadow: 0 0 16px rgba(250, 204, 21, 0.5);
+  }
+
+  .aks-matrix-info h4,
+  .aks-matrix-info p,
+  .figure-caption {
+    color: #fdfdfd;
+  }
+}
+
+@keyframes matrixFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

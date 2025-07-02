@@ -1,0 +1,222 @@
+---
+id: use-cases
+title: Real-World Use Cases for APIs
+sidebar_label: 🧩 API Use Cases
+---
+
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import SpotlightCode from '@site/src/components/SpotlightCode';
+import RedocEmbedModal from '@site/src/components/RedocEmbedModal';
+import AnimatedUsageTip from '@site/src/components/AnimatedUsageTip';
+import UseCaseCard from '@site/src/components/UseCaseCard';
+import UseCaseGrid from '@site/src/components/UseCaseGrid';
+import RedocEmbed from '@site/src/components/RedocEmbed';
+
+
+# 🧩 Real-World Use Cases for APIs
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+<p>Now that we've thoroughly explored <HoverExplain word="Swagger UI" definition="An interface for testing and exploring live API endpoints interactively." />, dissected <HoverExplain word="Redoc" definition="A documentation-focused OpenAPI viewer ideal for structured schemas and contract inspection." />, and mastered both <HoverExplain word="YAML" definition="A human-readable data format used to define API behavior in OpenAPI specifications." /> and schema modeling, it’s time to examine how APIs thrive in production.</p>
+</motion.div>
+
+<p>Real-world APIs are not confined to tech demos, they are core operational lifelines in every SaaS company, hospital system, bank, and logistics platform. In this section, we’ll study use cases that rely on everything we’ve documented so far, including token structure, schema modeling, nested validation, and documentation clarity. Each example introduces new problems, and explains how strategic documentation helps solve them.</p>
+
+---
+
+## 🏦 Fintech: Verifying Transactions and Nested Payloads
+
+<p>Fintech APIs balance business agility and regulatory compliance. Payments, ledger audits, and customer data must be schema-driven and transparent to banks, vendors, and regulators. Documentation clarity avoids lawsuits and streamlines integrations.</p>
+
+<SpotlightCode
+  title="Transaction Schema (YAML & JSON)"
+  yamlCode={`components:
+  schemas:
+    Transaction:
+      type: object
+      required: [id, amount, currency, method]
+      properties:
+        id:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        method:
+          enum: ['card', 'bank', 'crypto']
+        metadata:
+          type: object
+          properties:
+            campaign_id:
+              type: string
+            partner_source:
+              type: string`}
+  jsonCode={`{
+  "components": {
+    "schemas": {
+      "Transaction": {
+        "type": "object",
+        "required": ["id", "amount", "currency", "method"],
+        "properties": {
+          "id": { "type": "string" },
+          "amount": { "type": "number" },
+          "currency": { "type": "string" },
+          "method": { "enum": ["card", "bank", "crypto"] },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "campaign_id": { "type": "string" },
+              "partner_source": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}`}
+/>
+
+<p><strong>Figure 1.</strong> This transaction schema includes optional metadata fields that only certain partners use. These become critical during campaign reporting or fraud audits, useful to finance leads and devs alike.</p>
+
+---
+
+## 🏥 Health Tech: Patient Records and Conditional Fields
+
+<p>Healthcare APIs frequently involve optional or conditionally required fields based on patient geography, insurance, or treatment history. These conditions are difficult to understand from Swagger alone. Redoc lets compliance officers explore these constraints structurally.</p>
+
+
+
+<RedocEmbed url="/use-case-snapshot.yaml" />
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+Unlike Swagger, which excels at interaction, Redoc is invaluable for **understanding use case-specific schemas at a glance**. It’s ideal for:
+
+- Reviewing complex schema structures like nested stops, role maps, or conditional fields;
+- Walking through what data a system actually expects or returns in production;
+- Helping cross-functional teams—legal, support, PMs, and QA—understand the contract in context.
+
+Whether it’s healthcare coverage, token behavior, or logistics stops, Redoc snapshots act as **source-of-truth documentation** for how an API is actually used in the real world.
+</motion.div>
+
+
+<UseCaseGrid>
+  <UseCaseCard
+    title="📦 SaaS User Profiles"
+    description="In SaaS, optional `plan_tier`, `invitation_code`, or `onboarding_state` fields are often missed. Redoc exposes these so Sales and Support know how users are initialized."
+  />
+
+  <UseCaseCard
+    title="🌍 Localization & Global APIs"
+    description="APIs with locale-specific defaults—like `currency`, `timezone`, `phone_formats`—benefit from Redoc trees that collapse irrelevant regions while showcasing constraints to translators and PMs."
+  />
+
+  <UseCaseCard
+    title="🔒 Security Teams and Role Mapping"
+    description="Security engineers inspect OAuth or Role-Based Access Controls by checking Redoc’s schema trees. Swagger can’t show scope interrelationships easily—but Redoc can."
+  />
+</UseCaseGrid>
+
+---
+
+## 🚚 Logistics & Fulfillment: Route Planning with Arrays
+
+<p>Delivery APIs like Uber, Instacart, or FedEx often deal with nested stops, ETAs, and dependency chains. Swagger can send sample calls, but only Redoc reveals field logic for dispatch algorithms and scheduling tools.</p>
+
+<SpotlightCode
+  title="RoutePlan Schema"
+  yamlCode={`components:
+  schemas:
+    RoutePlan:
+      type: object
+      required: [origin, stops]
+      properties:
+        origin:
+          type: string
+        stops:
+          type: array
+          items:
+            type: object
+            properties:
+              address:
+                type: string
+              expected_arrival:
+                type: string
+                format: date-time`}
+  jsonCode={`{
+  "components": {
+    "schemas": {
+      "RoutePlan": {
+        "type": "object",
+        "required": ["origin", "stops"],
+        "properties": {
+          "origin": { "type": "string" },
+          "stops": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "address": { "type": "string" },
+                "expected_arrival": { "type": "string", "format": "date-time" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}`}
+/>
+
+<p><strong>Figure 3.</strong> Stops appear as array items with nested subfields. This allows scheduling dashboards to reuse schemas across apps and services powering automation downstream.</p>
+
+---
+
+## 🧪 Developer Experience: Auth Tokens
+
+<p>Nothing breaks onboarding like an undocumented auth response. Developers need to know what they’ll receive after login, including when tokens expire, what scopes they grant, and how long sessions persist.</p>
+
+<SpotlightCode
+  title="Token Response Schema"
+  yamlCode={`components:
+  schemas:
+    AuthToken:
+      type: object
+      properties:
+        token:
+          type: string
+        expires_in:
+          type: integer
+        scope:
+          type: string`}
+  jsonCode={`{
+  "components": {
+    "schemas": {
+      "AuthToken": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string" },
+          "expires_in": { "type": "integer" },
+          "scope": { "type": "string" }
+        }
+      }
+    }
+  }
+}`}
+/>
+
+<p><strong>Figure 4.</strong> Even a simple token structure needs full clarity. Without knowing token TTL, developers may cache expired data or request new tokens too frequently. This is where Redoc shines.</p>
+
+
+
+<AnimatedUsageTip
+  tip="Don’t document endpoints. Document workflows."
+  emphasis="APIs are not about what’s possible—they're about what roles can do with the data."
+/>
+
+---
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+## 🔄 Transition to OpenAPI & Integration
+</motion.div>
+
+<p>We’ve now explored API behavior from the lens of stakeholders—not just developers. In the next section, you’ll learn how to export full specs into Postman, explain YAML to PMs, and integrate OpenAPI with Git-based systems like SwaggerHub.</p>

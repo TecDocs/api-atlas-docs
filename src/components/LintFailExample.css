@@ -1,0 +1,26 @@
+.lint-example {
+  background: var(--ifm-background-surface-color);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: var(--ifm-shadow-md);
+  animation: floatIn 0.6s ease forwards;
+}
+
+.lint-code {
+  background: var(--ifm-code-background);
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin-bottom: 0.75rem;
+}
+
+.lint-error {
+  color: var(--ifm-color-danger);
+  font-weight: bold;
+}
+
+.lint-caption {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: var(--ifm-color-secondary);
+}

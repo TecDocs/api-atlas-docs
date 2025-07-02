@@ -1,0 +1,161 @@
+---
+id: test-your-first-endpoint
+title: Test Your First Endpoint
+sidebar_label: 🧼 Test Your First Endpoint
+---
+
+import { motion } from 'framer-motion';
+import HoverExplain from '@site/src/components/HoverExplain';
+import SwaggerEmbed from '@site/src/components/SwaggerEmbed';
+import RedocEmbed from '@site/src/components/RedocEmbed';
+import SpotlightCode from '@site/src/components/SpotlightCode';
+import Figure from '@site/src/components/Figure';
+import Link from '@docusaurus/Link';
+
+# 🧪 Test Your First Endpoint
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+Before you deploy anything into production, it's crucial to simulate how your API will respond in both expected and unexpected situations. The foundation of that process starts with testing <HoverExplain word="endpoints" definition="Specific URL paths within your API that accept requests like GET, POST, PUT, DELETE, etc." />, which act as the building blocks of all interactions between client and server.
+
+Endpoints represent not just routes, but contracts—defining exactly what input they accept, what output they provide, and what types of responses (success or failure) they produce. In this section, you’ll learn how to **test live endpoints** using Swagger and Redoc; simulate edge cases and invalid requests; and confirm whether your <HoverExplain word="OpenAPI spec" definition="A standardized, machine-readable description of your API, including endpoints, methods, and schemas." /> matches the actual behavior of your mock or live server.
+</motion.div>
+
+---
+
+## 🛰️ What Is an API Endpoint Really?
+
+<SpotlightCode
+  title="GET Request Example"
+  yamlCode={`get:
+  summary: Get all users
+  responses:
+    '200':
+      description: A list of users`}
+  jsonCode={`{
+  "method": "GET",
+  "endpoint": "/users",
+  "response": {
+    "status": 200,
+    "data": ["user1", "user2"]
+  }
+}`}
+  highlightLines={[1, 3]}
+/>
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+An endpoint, conceptually, is a **touchpoint between your consumer and your server logic**. In a RESTful API, endpoints are mapped to logical resources such as `/users`, `/posts`, or `/payments`; each resource is then manipulated through verbs like `GET`, `POST`, `PATCH`, or `DELETE`.
+
+For example, `GET /users` retrieves a list of users; `POST /users` adds a new user; `DELETE /users/:id` removes a specific user.
+
+What matters most is that these are not just arbitrary URLs; they are documented, versioned, and expected to behave predictably. Their responses, error codes, and accepted parameters are defined in your YAML and enforced by validators or mock servers. This makes API endpoints both **contractual** and **testable**.
+</motion.div>
+
+---
+
+## ⚙️ Swagger Try It Out: Live Request Simulation
+
+<SwaggerEmbed url="/fake-spec.yaml" />
+
+<div style={{ textAlign: 'center', fontSize: '0.9rem', marginTop: '-0.5rem', marginBottom: '2.5rem', color: '#888' }}>
+  <em>Figure 1. Swagger UI testbed for sending mock requests</em>
+</div>
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+With your <HoverExplain word="mock server" definition="A temporary local server that mimics real API behavior using predefined responses." /> running via Mockoon, Swagger allows you to execute requests directly from the browser.
+
+Try these: `GET /users` to pull live mock data; `POST /users` to simulate adding new entries; use invalid formats to trigger errors intentionally.
+
+<SpotlightCode
+  title="POST Body Example"
+  yamlCode={`requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+          - email
+        properties:
+          name:
+            type: string
+          email:
+            type: string`}
+  jsonCode={`{
+  "name": "Alice",
+  "email": "alice@example.com"
+}`}
+  highlightLines={[4, 5, 6]}
+/>
+
+Swagger’s <HoverExplain word="Try It Out" definition="A Swagger UI feature that allows real API requests to be made directly from the documentation interface." /> feature provides real-time feedback for both successful and failing requests, helping confirm that your request schema, required fields, and response codes behave as documented.
+</motion.div>
+
+---
+
+## 🧯 Simulate Errors, Invalid Requests, and Edge Conditions
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+To build a **reliable API**, it’s essential to simulate how things behave when they go wrong. Using Swagger, Postman, or curl, try submitting incomplete JSON payloads, unauthorized tokens, or malformed requests. Doing this allows you to confirm that your API returns appropriate status codes, such as: `400` for malformed input; `401` for missing auth headers; `500` for internal logic failures.
+
+<SpotlightCode
+  title="Error Response Example"
+  yamlCode={`responses:
+  '400':
+    description: Missing required field
+  '500':
+    description: Internal server error`}
+  jsonCode={`{
+  "400": "Missing required field",
+  "500": "Internal server error"
+}`}
+  highlightLines={[2, 4]}
+/>
+
+When your YAML accurately reflects these conditions, your frontend and partner teams can **design their error handling** and retries with confidence.
+</motion.div>
+
+---
+
+## 📘 Redoc Snapshot View
+
+<div style={{ marginBottom: '2rem' }}>
+  <RedocEmbed url="/fake-spec.yaml" />
+</div>
+
+<div
+  style={{
+    textAlign: 'center',
+    fontSize: '0.9rem',
+    marginTop: '0rem',
+    marginBottom: '3rem',
+    color: '#888',
+  }}
+>
+  <em>Figure 2. Redoc snapshot reference overview</em>
+</div>
+
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+>
+Redoc focuses on documentation clarity rather than interaction. Use it to review schema structure, enum types, and required vs optional fields; share a source of truth with clients or devs; and navigate the contract without needing to run live requests.
+
+This static overview is commonly used in security reviews, audits, onboarding materials, and QA handoffs—helping teams align around what's been documented versus what’s been implemented.
+</motion.div>
+
+---
+
+## ✅ Summary & What's Next
+
+<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+You now understand what API endpoints are, how to run basic and advanced test cases using Swagger and Redoc, and how to simulate failures that ensure your YAML spec is robust. These tools help enforce the contract between teams and ensure predictable integration behavior.
+
+This chapter covered: live request simulation using Swagger; error handling via malformed or invalid payloads; static schema review and contract sharing with Redoc.
+
+In the next section, we’ll take a deeper look at <HoverExplain word="HTTP status codes" definition="Three-digit codes returned by servers to indicate the result of a request (e.g., 200 OK, 404 Not Found)." />—how to interpret them, map them to your endpoints, and return custom messages based on context.
+</motion.div>
+
+<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
+👉 Ready to continue? Jump to <Link to="/docs/api-reference/understanding-status-codes">Understanding HTTP Status Codes</Link>.
+</motion.div>

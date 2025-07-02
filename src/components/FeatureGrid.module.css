@@ -1,0 +1,47 @@
+.gridSection {
+  padding: 5rem 2rem;
+  background: var(--ifm-background-color);
+  text-align: center;
+}
+
+.heading {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 3rem;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.card {
+  flex: 1 1 280px;
+  max-width: 360px;
+  background: var(--ifm-card-background);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: var(--ifm-global-shadow-lw);
+  transition: transform 0.2s ease;
+  text-align: center;
+}
+
+.card h3 {
+  margin: 0.75rem 0;
+  font-size: 1.25rem;
+}
+
+.card p {
+  font-size: 1rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+.emoji {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 0.5rem;
+}

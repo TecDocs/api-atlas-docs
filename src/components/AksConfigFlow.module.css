@@ -1,0 +1,42 @@
+.flowContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* Adds space between each image block */
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.flowImage {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.caption {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  text-align: center;
+  max-width: 700px;
+  color: var(--ifm-color-content-secondary); /* uses theme-aware secondary text color */
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.summary {
+  margin-top: 2.5rem;
+  font-size: 1rem;
+  text-align: center;
+  max-width: 740px;
+  color: var(--ifm-color-content);
+  line-height: 1.75;
+}
+
+:root {
+  --caption-light-color: #444;
+}
+
+[data-theme='light'] .caption {
+  color: var(--caption-light-color);
+}

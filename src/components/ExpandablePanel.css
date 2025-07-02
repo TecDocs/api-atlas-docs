@@ -1,0 +1,22 @@
+
+.expandable-panel {
+  background: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: var(--shadow-style);
+  margin-bottom: 1rem;
+}
+
+.expand-toggle {
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.expand-content {
+  margin-top: 0.75rem;
+}

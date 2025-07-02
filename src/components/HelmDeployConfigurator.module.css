@@ -1,0 +1,41 @@
+.configurator {
+  background-color: var(--ifm-background-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.label {
+  font-size: 1rem;
+  color: var(--ifm-color-primary);
+  margin-bottom: 1rem;
+}
+
+.yamlOutput {
+  background-color: var(--ifm-code-background);
+  color: var(--ifm-font-color-base);
+  font-family: monospace;
+  font-size: 0.95rem;
+  padding: 1.2rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  text-align: left;
+  white-space: pre-wrap;
+  transition: background-color 0.3s ease;
+}
+
+.toggleButton {
+  background-color: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggleButton:hover {
+  background-color: var(--ifm-color-primary-dark);
+}

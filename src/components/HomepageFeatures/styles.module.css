@@ -1,0 +1,25 @@
+.hero {
+  padding: 5rem 1rem 3rem;
+  text-align: center;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--ifm-color-secondary);
+}
+
+.themeToggleInfo {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: var(--ifm-color-emphasis-600);
+}

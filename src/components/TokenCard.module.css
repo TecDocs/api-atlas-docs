@@ -1,0 +1,10 @@
+.tokenCard {
+  background-color: var(--ifm-card-background-color);
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: box-shadow 0.3s ease;
+  box-shadow: var(--ifm-global-shadow-lw);
+}
+.tokenCard:hover {
+  box-shadow: var(--ifm-global-shadow-md);
+}

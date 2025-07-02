@@ -1,0 +1,14 @@
+
+.flow {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.tree {
+  font-family: monospace;
+  background: var(--ifm-color-emphasis-100);
+  padding: 12px;
+  border-radius: 6px;
+}

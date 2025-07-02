@@ -1,0 +1,25 @@
+.component-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  animation: floatIn 0.6s ease forwards;
+}
+
+.stack-block {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.stack-block:hover {
+  transform: scale(1.05);
+}
+
+.stack-caption {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: var(--ifm-color-secondary);
+}

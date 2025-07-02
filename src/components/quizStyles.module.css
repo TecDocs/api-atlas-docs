@@ -1,0 +1,51 @@
+.quizContainer {
+  background-color: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  box-shadow: var(--ifm-global-shadow-lw);
+}
+
+.quizTitle {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.optionList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.option {
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: var(--ifm-hover-overlay);
+  transition: background 0.3s ease;
+}
+
+.option:hover {
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.selected {
+  border: 2px solid var(--ifm-color-primary);
+}
+
+.correct {
+  background-color: #d2f8d2;
+  border: 2px solid #28a745;
+}
+
+.incorrect {
+  background-color: #ffe0e0;
+  border: 2px solid #dc3545;
+}
+
+.explanation {
+  margin-top: 1rem;
+  font-weight: 500;
+}

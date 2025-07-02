@@ -1,0 +1,86 @@
+.quizBox {
+  background-color: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.quizTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+.questionBlock {
+  margin-bottom: 1.5rem;
+}
+
+.questionText {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-color-content);
+}
+
+.optionsList {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.option {
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s, border 0.2s;
+}
+
+.option:hover {
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.selected {
+  border-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-primary-lightest);
+}
+
+.correct {
+  border-color: var(--ifm-color-success);
+  background-color: var(--ifm-color-success-contrast-background);
+  color: var(--ifm-color-success);
+  font-weight: bold;
+}
+
+.incorrect {
+  border-color: var(--ifm-color-danger);
+  background-color: var(--ifm-color-danger-contrast-background);
+  color: var(--ifm-color-danger);
+  font-weight: bold;
+}
+
+.submitButton {
+  background-color: var(--ifm-color-primary);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: var(--ifm-color-primary-dark);
+}
+
+.resultText {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ifm-color-content);
+  margin-top: 1rem;
+}

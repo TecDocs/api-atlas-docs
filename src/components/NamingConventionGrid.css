@@ -1,0 +1,21 @@
+.naming-grid table {
+  width: 100%;
+  border-collapse: collapse;
+  animation: floatIn 0.6s ease forwards;
+}
+
+.naming-grid th, .naming-grid td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.naming-grid tr:hover {
+  background-color: var(--ifm-hover-overlay);
+}
+
+.grid-caption {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: var(--ifm-color-secondary);
+}
