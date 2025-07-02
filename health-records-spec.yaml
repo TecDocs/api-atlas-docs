@@ -1,0 +1,92 @@
+openapi: 3.0.3
+info:
+  title: Health Records API
+  description: A simplified patient record API for health tech platforms.
+  version: 1.0.0
+
+paths:
+  /patients/{id}:
+    get:
+      summary: Get patient record by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Patient record found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '404':
+          description: Patient not found
+
+components:
+  schemas:
+    Patient:
+      type: object
+      required: [id, name, dob, vitals]
+      properties:
+        id:
+          type: string
+          example: "abc123"
+        name:
+          type: string
+          example: "Jane Doe"
+        dob:
+          type: string
+          format: date
+          example: "1988-04-10"
+        vitals:
+          $ref: '#/components/schemas/Vitals'
+        insurance:
+          $ref: '#/components/schemas/Insurance'
+        flags:
+          $ref: '#/components/schemas/Flags'
+
+    Vitals:
+      type: object
+      required: [height_cm, weight_kg]
+      properties:
+        height_cm:
+          type: number
+          example: 170
+        weight_kg:
+          type: number
+          example: 68
+        blood_pressure:
+          type: string
+          example: "120/80"
+        heart_rate:
+          type: integer
+          example: 72
+
+    Insurance:
+      type: object
+      properties:
+        provider:
+          type: string
+          example: "HealthNet"
+        policy_number:
+          type: string
+          example: "HN-987654321"
+        active:
+          type: boolean
+          example: true
+
+    Flags:
+      type: object
+      properties:
+        requires_followup:
+          type: boolean
+          example: true
+        high_risk:
+          type: boolean
+          example: false
+        region:
+          type: string
+          enum: [US, EU, APAC]
+          example: "US"

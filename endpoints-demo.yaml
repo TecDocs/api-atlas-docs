@@ -1,0 +1,21 @@
+openapi: 3.0.1
+info:
+  title: API Atlas Demo
+  version: "1.0"
+paths:
+  /users:
+    get:
+      summary: Get all users
+      operationId: getUsers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: "123"
+                  name: "Alice"
+                  email: "alice@example.com"
+                - id: "456"
+                  name: "Bob"
+                  email: "bob@example.com"

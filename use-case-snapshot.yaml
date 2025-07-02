@@ -1,0 +1,28 @@
+openapi: 3.0.0
+info:
+  title: Use Case Snapshot
+  version: 1.0.0
+
+paths:
+  /auth/token:
+    get:
+      summary: Retrieve an access token
+      responses:
+        '200':
+          description: Token returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+
+components:
+  schemas:
+    AuthToken:
+      type: object
+      properties:
+        token:
+          type: string
+        expires_in:
+          type: integer
+        scope:
+          type: string

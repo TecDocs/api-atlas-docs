@@ -1,0 +1,71 @@
+openapi: 3.0.3
+info:
+  title: API Atlas Demo
+  version: 1.0.0
+  description: >
+    This is a mock API for demo purposes. It allows interaction with a
+    simulated user database through GET and POST requests.
+servers:
+  - url: http://localhost:3000
+paths:
+  /users:
+    get:
+      summary: Get all users
+      tags:
+        - Users
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      summary: Create a new user
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+      responses:
+        '201':
+          description: Created user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - name
+        - email
+      properties:
+        id:
+          type: string
+          example: "1"
+        name:
+          type: string
+          example: "Alice Doe"
+        email:
+          type: string
+          example: "alice@example.com"
+    NewUser:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+          example: "Bob Smith"
+        email:
+          type: string
+          example: "bob@example.com"

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkapi_atlas_docs=self.webpackChunkapi_atlas_docs||[]).push([[647],{7121:(s,e,a)=>{a.r(e),a.d(e,{default:()=>n});a(96540);var r=a(34164),c=a(45500),t=a(17559),u=a(22831),l=a(96927),d=a(74848);function n(s){return(0,d.jsx)(c.e3,{className:(0,r.A)(t.G.wrapper.docsPages),children:(0,d.jsx)(l.A,{children:(0,u.v)(s.route.routes)})})}}}]);
