@@ -91,7 +91,7 @@ html[data-theme='dark'] .logo-icon:hover {
   animation: fadeInUp 0.6s ease-out forwards;
 }
 
-/* === Default (light mode) Icons === */
+/* Light mode */
 .github-icon {
   background-image: url('/img/github-icon.svg');
 }
@@ -102,7 +102,7 @@ html[data-theme='dark'] .logo-icon:hover {
   background-image: url('/img/briefcase-icon.svg');
 }
 
-/* === Dark Mode Icons === */
+/* Dark mode */
 html[data-theme='dark'] .github-icon {
   background-image: url('/img/github-icon-white.svg');
 }
@@ -112,6 +112,7 @@ html[data-theme='dark'] .linkedin-icon {
 html[data-theme='dark'] .portfolio-icon {
   background-image: url('/img/briefcase-icon-white.svg');
 }
+
 
 /* === Theme Toggle Icon === */
 .theme-toggle-icon img {
@@ -130,7 +131,7 @@ html[data-theme='dark'] .theme-toggle-icon img {
   filter: brightness(8) drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
 }
 
-
+/* === Next Button === */
 .next-doc-button {
   display: inline-block;
   font-size: 1.25rem;
@@ -151,7 +152,6 @@ html[data-theme='dark'] .theme-toggle-icon img {
   box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
 }
 
-/* Theme-aware refinements */
 html[data-theme='dark'] .next-doc-button {
   background-color: #064e3b;
   box-shadow: 0 0 16px #10b981;
@@ -164,7 +164,6 @@ html[data-theme='dark'] .next-doc-button:hover {
   transform: scale(1.07);
 }
 
-/* Text coloring inside the button */
 .next-label {
   color: #bbf7d0;
   font-weight: 700;
@@ -175,6 +174,7 @@ html[data-theme='dark'] .next-doc-button:hover {
   font-weight: 700;
 }
 
+/* === Hover Word === */
 .hover-word {
   display: inline-block;
   transition: transform 0.2s ease, color 0.2s ease;
@@ -186,6 +186,7 @@ html[data-theme='dark'] .next-doc-button:hover {
   color: var(--ifm-color-primary);
 }
 
+/* === Checklist Card === */
 .checklist-card {
   background: var(--ifm-background-color);
   padding: 1rem 1.25rem;
@@ -201,10 +202,10 @@ html[data-theme='dark'] .next-doc-button:hover {
 
 .theme-light .checklist-card {
   border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06); /* <- Soft lift effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
 }
 
-
+/* === Requirements === */
 .requirement-item {
   background-color: var(--ifm-background-color);
   border-radius: 8px;
@@ -212,20 +213,6 @@ html[data-theme='dark'] .next-doc-button:hover {
   margin-bottom: 1rem;
   transition: all 0.3s ease;
   border: 1px solid transparent;
-}
-
-.dark-mode-glow {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.06);
-}
-
-.light-mode-shadow {
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
-}
-
-.requirement-item {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: default;
 }
 
@@ -241,6 +228,12 @@ html[data-theme='light'] .requirement-item {
   transform: scale(1.015);
 }
 
+/* === Redoc Attribution Hide === */
+.redoc-wrap .powered-by {
+  display: none !important;
+}
+
+/* === Redoc Try Out Button Hover === */
 button.try-out__btn:hover {
   transform: scale(1.06);
   background-color: #00ffff;
@@ -248,12 +241,7 @@ button.try-out__btn:hover {
   transition: all 0.25s ease;
 }
 
-/* hide Redoc attribution */
-.redoc-wrap .powered-by {
-  display: none !important;
-}
-
-
+/* === Use Case Cards === */
 .usecase-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
@@ -269,6 +257,8 @@ html[data-theme='light'] .usecase-card {
   background-color: #fff;
   border: 1px solid #ddd;
 }
+
+/* === Quiz Styling === */
 .quiz-block.enhanced {
   border-radius: 1rem;
   padding: 2rem;

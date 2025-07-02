@@ -5,7 +5,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 const config = {
   title: 'API Atlas Docs',
   tagline: 'Interactive API reference, deployment, and onboarding site',
-  favicon: 'img/tecdocs-favicon.ico',
+  favicon: '/api-atlas-docs/img/tecdocs-favicon.ico', // ✅ GitHub Pages safe path
 
   // Production site config for GitHub Pages
   url: 'https://tecdocs.github.io', // GitHub Pages domain
@@ -14,8 +14,8 @@ const config = {
   // GitHub Pages deployment settings
   organizationName: 'TecDocs', // GitHub user/org
   projectName: 'api-atlas-docs', // GitHub repo name
-  deploymentBranch: 'gh-pages', // Where site gets deployed
-  trailingSlash: false, // No trailing slashes in URLs
+  deploymentBranch: 'gh-pages',
+  trailingSlash: false,
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -43,12 +43,13 @@ const config = {
   ],
 
   themeConfig: {
-    image: 'img/docusaurus-social-card.jpg',
+    image: '/api-atlas-docs/img/docusaurus-social-card.jpg', // ✅ Social preview image
+
     navbar: {
       title: 'Joshua Schoen',
       logo: {
         alt: 'Joshua Logo',
-        src: 'img/transparent-icon.svg',
+        src: '/api-atlas-docs/img/transparent-icon.svg', // ✅ Path fix
       },
       items: [
         {
@@ -71,11 +72,13 @@ const config = {
         },
       ],
     },
+
     footer: {
       style: 'dark',
       links: [],
       copyright: `© 2025 Joshua Schoen`,
     },
+
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,

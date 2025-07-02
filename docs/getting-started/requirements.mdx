@@ -52,7 +52,7 @@ Your command line interface (CLI) is the control panel for everything you do wit
 
 ## 🔓 Open Ports (3000 or 5000) (⏱️ 1–2 min)
 
-<Figure src="/img/port-access-localhost.png" caption="Figure 1. Port requirements for local Swagger UI previews using localhost" animation="fadeInOnScroll" delay={0.5} />
+<Figure src="/api-atlas-docs/img/port-access-localhost.png" caption="Figure 1. Port requirements for local Swagger UI previews using localhost" animation="fadeInOnScroll" delay={0.5} />
 
 <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.6 }}>
 Swagger UI, along with many local dev servers, defaults to port 3000 or 5000. If either port is already in use, by Docker, React apps, or background services, your preview may fail silently without visible errors To check which processes are using your ports, run <code>lsof -i :3000</code> (macOS/Linux) or <code>netstat -aon | findstr :3000</code> (Windows), and then stop them with <code>kill -9 PID</code> or <code>taskkill /PID</code>. You can also change the default port in your Swagger configuration, although having open ports is preferred.
@@ -70,7 +70,8 @@ Make sure your machine has unrestricted access to the internet when fetching spe
 
 ## 🧹 YAML Linter Plugin (⏱️ 1–2 min)
 
-<Figure src="/img/yaml-error-formatting.png" caption="Figure 2. YAML formatting issues causing Swagger UI to break silently" animation="fadeInOnScroll" delay={0.7} />
+<Figure src="/api-atlas-docs/img/yaml-error-formatting.png" caption="Figure 2. YAML formatting issues causing Swagger UI to break silently" animation="fadeInOnScroll" delay={0.7} />
+
 
 <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.7, duration: 0.6 }}>
 YAML syntax is whitespace-dependent. One misaligned colon, missing indent, or trailing space can cause the entire file to fail. Neither Swagger nor Redoc will show you a useful error message, they’ll just fail silently. Use a YAML linter plugin in VS Code or your IDE to validate before pushing changes. A linter will catch mistakes that aren’t visible by eye and prevent hours of debugging.
@@ -111,7 +112,7 @@ Many endpoints in the fake-spec mock API require a token header such as <code>Au
   ]}
 />
 
-<Figure src="/img/requirements-environment.png" caption="Figure 3. Recommended dev environment with CLI, VS Code, Swagger, and GitHub sync" animation="fadeInOnScroll" delay={0.9} />
+<Figure src="/api-atlas-docs/img/requirements-environment.png" caption="Figure 3. Recommended dev environment with CLI, VS Code, Swagger, and GitHub sync" animation="fadeInOnScroll" delay={0.9} />
 
 ---
 
